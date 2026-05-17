@@ -588,7 +588,7 @@
           <div class="form-row">
             <label>幣別
               <select id="expenseCurrency">
-                <option value="VND">VND 越南盾</option>
+                <option value="THB">THB 泰銖</option>
                 <option value="NTD">NTD 台幣</option>
                 <option value="USD">USD 美金</option>
               </select>
@@ -616,7 +616,7 @@
             <input id="expenseReceipt" type="file" accept="image/*,application/pdf" />
           </label>
           <label>收據備註 / 可辨識文字
-            <input id="expenseReceiptText" placeholder="例如：visa USD 25、hotel VND 1200000、Grab 180000 VND" />
+            <input id="expenseReceiptText" placeholder="例如：visa USD 25、hotel THB 2500、Grab 180 THB" />
           </label>
           <button class="btn" id="detectExpenseBtn" type="button">從收據文字偵測金額</button>
           <button class="btn primary" type="submit">新增花費</button>
@@ -674,7 +674,7 @@
             <form id="docForm">
               <div class="form-row">
                 <label>文件名稱
-                  <input id="docTitle" placeholder="例如：MaiChi Villa、Sala Danang Beach Hotel" required />
+                  <input id="docTitle" placeholder="例如：清邁飯店訂房確認、大象公園票券" required />
                 </label>
                 <label>分類
                   <select id="docCategory">
@@ -708,7 +708,7 @@
                 </label>
                 <label>費用幣別
                   <select id="docExpenseCurrency">
-                    <option value="VND">VND 越南盾</option>
+                    <option value="THB">THB 泰銖</option>
                     <option value="NTD">NTD 台幣</option>
                     <option value="USD">USD 美金</option>
                   </select>
@@ -1503,6 +1503,7 @@ window.TRIP_CONFIG = {
 
     function toNtd(amount, currency) {
       const value = Number(amount || 0);
+      if (currency === "THB") return value / 1.1;
       if (currency === "VND") return value / 780;
       if (currency === "USD") return value * 32;
       return value;
@@ -1521,8 +1522,8 @@ window.TRIP_CONFIG = {
 
     function detectExpenseFromText(text) {
       const source = text.replace(/,/g, "");
-      const currencyBefore = source.match(/\b(USD|VND|NTD|TWD)\s*([$]?\s*)?(\d+(?:\.\d+)?)/i);
-      const currencyAfter = source.match(/(\d+(?:\.\d+)?)\s*(USD|VND|NTD|TWD)\b/i);
+      const currencyBefore = source.match(/\b(USD|THB|VND|NTD|TWD)\s*([$]?\s*)?(\d+(?:\.\d+)?)/i);
+      const currencyAfter = source.match(/(\d+(?:\.\d+)?)\s*(USD|THB|VND|NTD|TWD)\b/i);
       const match = currencyBefore || currencyAfter;
       if (!match) return null;
       const currency = (currencyBefore ? match[1] : match[2]).toUpperCase().replace("TWD", "NTD");
@@ -2157,7 +2158,7 @@ window.TRIP_CONFIG = {
       const text = `${$("#expenseTitle").value} ${$("#expenseReceiptText").value} ${fileName}`;
       const detected = detectExpenseFromText(text);
       if (!detected) {
-        alert("目前沒有偵測到金額。可在備註輸入像 USD 25、VND 1200000、NTD 800 這類文字。");
+        alert("目前沒有偵測到金額。可在備註輸入像 USD 25、THB 2500、NTD 800 這類文字。");
         return;
       }
       $("#expenseAmount").value = detected.amount;
