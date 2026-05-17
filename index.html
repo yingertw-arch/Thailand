@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#c47a2a" />
+  <title>2027 泰國清邁・曼谷旅行手冊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --paper: #fffdfa;
+      --ink: #17211d;
+      --muted: #65736d;
+      --line: #e3ded4;
+      --hoi: #0f5a49;
+      --da: #1d4f7a;
+      --hue: #7b3e25;
+      --sun: #d49a2a;
+      --bad: #b94435;
+      --shadow: 0 14px 34px rgba(31, 38, 35, .09);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    button, input, textarea, select { font: inherit; }
+    a { color: inherit; }
+
+    .hero {
+      min-height: 68svh;
+      padding: max(22px, env(safe-area-inset-top)) 18px 22px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(13, 55, 45, .10), rgba(13, 55, 45, .80)),
+        url("https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1600&q=80") center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 100%;
+    }
+    .brand { font-weight: 900; letter-spacing: .02em; }
+    .auth {
+      min-height: 40px;
+      border: 1px solid rgba(255,255,255,.55);
+      color: #fff;
+      background: rgba(0,0,0,.22);
+      border-radius: 999px;
+      padding: 7px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .auth img { width: 24px; height: 24px; border-radius: 50%; }
+    .hero h1 {
+      font-size: clamp(2.45rem, 13vw, 5.4rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+      margin: 0 0 14px;
+      max-width: 860px;
+      text-wrap: balance;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 640px;
+      color: rgba(255,255,255,.92);
+      overflow-wrap: anywhere;
+    }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .chip {
+      border: 1px solid rgba(255,255,255,.42);
+      background: rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: .86rem;
+    }
+    .next-peek { color: rgba(255,255,255,.9); font-size: .88rem; margin-top: 24px; }
+
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(74px, 1fr));
+      overflow-x: auto;
+      background: rgba(255, 253, 250, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .tab {
+      min-height: 52px;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      color: var(--muted);
+      background: transparent;
+      font-size: .86rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .tab.active { color: var(--hoi); border-bottom-color: var(--hoi); }
+
+    main { padding: 18px 14px 96px; max-width: 1120px; margin: 0 auto; }
+    .panel { display: none; scroll-margin-top: 68px; }
+    .panel.active { display: block; }
+    .section-head {
+      margin: 26px 0 12px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .section-head h2 { margin: 0; font-size: 1.25rem; line-height: 1.2; }
+    .section-head span { color: var(--muted); font-size: .88rem; }
+
+    .day-hub {
+      margin: 4px 0 18px;
+    }
+    .date-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(88px, 1fr);
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px 0 12px;
+      scroll-snap-type: x mandatory;
+    }
+    .date-pill {
+      min-height: 116px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255, 253, 250, .84);
+      color: var(--muted);
+      box-shadow: 0 8px 18px rgba(31, 38, 35, .06);
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      padding: 10px 8px;
+      cursor: pointer;
+      scroll-snap-align: center;
+    }
+    .date-pill.active {
+      background: #342b24;
+      color: #fff;
+      border-color: #342b24;
+    }
+    .date-pill small { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    .date-pill b { font-size: 2rem; line-height: 1; }
+    .date-pill span { font-size: .86rem; }
+    .day-progress {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      margin: 3px 0 14px;
+      letter-spacing: .06em;
+    }
+    .day-card, .tool-card, .info-group {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .day-card { margin: 12px 0; overflow: hidden; }
+    .day-top {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .date {
+      color: #fff;
+      background: var(--hoi);
+      padding: 14px 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 96px;
+    }
+    .date.da { background: var(--da); }
+    .date.hue { background: var(--hue); }
+    .date b { font-size: 1.25rem; line-height: 1.1; }
+    .date small { opacity: .86; margin-top: 4px; }
+    .summary { padding: 14px; }
+    .summary h3 { margin: 0 0 6px; font-size: 1.03rem; line-height: 1.35; }
+    .summary p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .hotel-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .hotel-line b { color: var(--ink); }
+    .mini-btn {
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      padding: 4px 9px;
+      font-size: .78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .day-body { padding: 4px 14px 14px; }
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline li:last-child { border-bottom: 0; }
+    .time { color: var(--hoi); font-weight: 900; font-size: .9rem; }
+    .spot-btn {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 0;
+      font-weight: 900;
+      text-align: left;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .note { display: block; color: var(--muted); font-size: .9rem; margin-top: 2px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .map-link, .btn {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 7px 12px;
+      font-size: .88rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .map-link.primary, .btn.primary { color: #fff; background: var(--hoi); border-color: var(--hoi); }
+    .btn.warn { color: #fff; background: var(--bad); border-color: var(--bad); }
+
+    .tool-card { padding: 14px; }
+    .tool-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    form { display: grid; gap: 10px; }
+    label { display: grid; gap: 5px; color: var(--muted); font-size: .86rem; font-weight: 800; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 11px;
+      min-height: 44px;
+    }
+    textarea { min-height: 132px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      background: #143d35;
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: 900;
+      margin: 10px 0;
+    }
+    .list { display: grid; gap: 8px; margin-top: 12px; }
+    .chart-wrap {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    #expenseChart {
+      width: 180px;
+      height: 180px;
+      max-width: 100%;
+    }
+    .legend { display: grid; gap: 7px; }
+    .legend-row {
+      display: grid;
+      grid-template-columns: 14px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+    }
+    .record {
+      display: grid;
+      gap: 4px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .record strong { display: flex; justify-content: space-between; gap: 10px; }
+    .record small { color: var(--muted); }
+    .day-record-group {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .day-record-group:last-child { border-bottom: 0; }
+    .day-record-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .day-record-head span:last-child { color: var(--muted); font-size: .86rem; font-weight: 800; }
+    .photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .photos img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .status { margin: 10px 0 0; color: var(--muted); font-size: .86rem; }
+    .install-note {
+      border-left: 4px solid var(--sun);
+      background: #fff7df;
+      padding: 10px 12px;
+      border-radius: 0 8px 8px 0;
+      color: #674806;
+      font-size: .9rem;
+    }
+
+    .other-stack { display: grid; gap: 12px; }
+    .info-group { overflow: hidden; }
+    .info-group summary {
+      cursor: pointer;
+      padding: 14px;
+      font-weight: 900;
+      list-style: none;
+    }
+    .info-group summary::-webkit-details-marker { display: none; }
+    .info-body {
+      border-top: 1px solid var(--line);
+      padding: 2px 14px 14px;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+    .info-body h3 { color: var(--ink); margin: 14px 0 5px; font-size: .98rem; }
+    .info-body ul { margin: 8px 0 0; padding-left: 20px; }
+    .info-body li { margin: 5px 0; }
+    .info-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: .88rem;
+    }
+    .info-body th, .info-body td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 4px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .offline-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .offline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .offline-item input {
+      width: 20px;
+      min-height: 20px;
+      margin-top: 3px;
+    }
+    .offline-item strong { display: block; }
+    .offline-item small { display: block; color: var(--muted); margin-top: 2px; }
+    .offline-progress {
+      margin: 10px 0 0;
+      color: var(--hoi);
+      font-weight: 900;
+    }
+    .member-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .doc-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .doc-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+    }
+    .doc-type {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: #e8f3ef;
+      color: var(--hoi);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    dialog {
+      width: min(92vw, 520px);
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+      padding: 0;
+      color: var(--ink);
+    }
+    dialog::backdrop { background: rgba(18, 24, 22, .48); }
+    .modal-body { padding: 18px; background: var(--paper); }
+    .modal-body h2 { margin: 0 0 8px; font-size: 1.22rem; }
+    .modal-body p { margin: 0; color: var(--muted); }
+    .modal-body .actions { margin-top: 14px; }
+    .place-links {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .place-links a {
+      display: block;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--hoi);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    @media (max-width: 780px) {
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: flex-start;
+        column-gap: 0;
+      }
+      .topbar .actions {
+        width: 100%;
+        max-width: 22.25rem;
+        flex: none;
+        min-width: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .hero > div:last-child {
+        max-width: 22.25rem;
+      }
+      .topbar .auth {
+        min-width: 0;
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: clamp(2.35rem, 12vw, 4rem);
+      }
+      .tabs { grid-template-columns: repeat(4, 88px); }
+      main { padding-inline: 10px; }
+      .form-row { grid-template-columns: 1fr; }
+      .chart-wrap { grid-template-columns: 1fr; justify-items: center; }
+      .legend { width: 100%; }
+      .section-head { align-items: start; flex-direction: column; gap: 4px; }
+    }
+    @media (min-width: 900px) {
+      .itinerary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .itinerary .section-head { grid-column: 1 / -1; }
+      .day-card { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="topbar">
+      <div class="brand">Thailand 2027</div>
+      <div class="actions" style="margin-top:0">
+        <button class="auth" id="loginBtn" type="button">使用 Google 登入</button>
+        <button class="auth" id="settingsBtn" type="button">設定</button>
+      </div>
+    </div>
+    <div>
+      <h1>清邁・曼谷<br />手機旅行手冊</h1>
+      <p>2027/1/23–2/2，清邁 7 夜・臥鋪火車 1 夜・曼谷 1 夜。行程內保留 Google Maps 連結，景點名稱可點開介紹，住宿也能臨時修改。</p>
+      <div class="chips">
+        <span class="chip">CNX 清邁機場入 / BKK 蘇旺納蓬出</span>
+        <span class="chip">清邁・清萊・曼谷</span>
+        <span class="chip">1 NTD ≈ 1.1 THB</span>
+      </div>
+      <div class="next-peek">往下滑看每日路線；登入後可同步花費、心得、照片與文件。</div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="主要功能">
+    <button class="tab active" type="button" data-panel="plan">行程</button>
+    <button class="tab" type="button" data-panel="expenses">花費</button>
+    <button class="tab" type="button" data-panel="journal">心得</button>
+    <button class="tab" type="button" data-panel="other">其他</button>
+  </nav>
+
+  <main>
+    <section class="day-hub" aria-label="每日主控台">
+      <div class="date-strip" id="dateStrip"></div>
+      <div class="day-progress" id="dayProgress"></div>
+    </section>
+
+    <section class="panel active" id="plan">
+      <div class="itinerary" id="itinerary"></div>
+    </section>
+
+    <section class="panel" id="expenses">
+      <div class="section-head">
+        <h2>花費總覽</h2>
+        <span>記錄每日支出與旅前共同費用，幫整趟旅程抓住預算。</span>
+      </div>
+      <div class="tool-card">
+        <form id="expenseForm">
+          <div class="form-row">
+            <label>花費歸屬
+              <select id="expenseScope">
+                <option value="day">每日花費</option>
+                <option value="trip">整趟旅程 / 旅前共同費用</option>
+              </select>
+            </label>
+            <label>日期
+              <input type="date" id="expenseDate" />
+            </label>
+          </div>
+          <p class="status" id="expenseScopeHint">每日花費會列到選取日期；機票、簽證、保險、住宿訂金可改選整趟旅程。</p>
+          <div class="form-row">
+            <label>幣別
+              <select id="expenseCurrency">
+                <option value="VND">VND 越南盾</option>
+                <option value="NTD">NTD 台幣</option>
+                <option value="USD">USD 美金</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>項目
+              <input id="expenseTitle" placeholder="例如：Grab 到清邁古城" required />
+            </label>
+            <label>金額
+              <input id="expenseAmount" type="number" inputmode="decimal" min="0" step="1" required />
+            </label>
+          </div>
+          <label>分類
+            <select id="expenseCategory">
+              <option>交通</option>
+              <option>餐飲</option>
+              <option>門票</option>
+              <option>住宿</option>
+              <option>購物</option>
+              <option>其他</option>
+            </select>
+          </label>
+          <label>收據照片或 PDF
+            <input id="expenseReceipt" type="file" accept="image/*,application/pdf" />
+          </label>
+          <label>收據備註 / 可辨識文字
+            <input id="expenseReceiptText" placeholder="例如：visa USD 25、hotel VND 1200000、Grab 180000 VND" />
+          </label>
+          <button class="btn" id="detectExpenseBtn" type="button">從收據文字偵測金額</button>
+          <button class="btn primary" type="submit">新增花費</button>
+        </form>
+        <div class="total"><span>目前累積台幣合計</span><span id="expenseTotal">NTD 0</span></div>
+        <div class="chart-wrap">
+          <canvas id="expenseChart" width="180" height="180" aria-label="費用分類圓餅圖"></canvas>
+          <div class="legend" id="expenseLegend"></div>
+        </div>
+        <div class="list" id="expenseList"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="journal">
+      <div class="section-head">
+        <h2>旅遊心得與照片</h2>
+        <span>把每天的片段、照片和想記住的小事留在同一份手冊裡。</span>
+      </div>
+      <div class="tool-card">
+        <form id="journalForm">
+          <div class="form-row">
+            <label>日期
+              <input type="date" id="journalDate" required />
+            </label>
+            <label>地點
+              <input id="journalPlace" placeholder="例如：清邁古城" />
+            </label>
+          </div>
+          <label>心得
+            <textarea id="journalText" placeholder="今天印象最深的是..." required></textarea>
+          </label>
+          <div class="actions">
+            <button class="btn" id="voiceBtn" type="button">開始語音輸入</button>
+            <label class="btn" for="photoInput">上傳照片</label>
+            <input id="photoInput" type="file" accept="image/*" multiple hidden />
+          </div>
+          <div class="photos" id="photoPreview"></div>
+          <button class="btn primary" type="submit">儲存心得</button>
+        </form>
+        <p class="status" id="voiceStatus">提示：iPhone/Android 也可以直接按鍵盤麥克風輸入文字。</p>
+        <div class="list" id="journalList"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="other">
+      <div class="section-head">
+        <h2>旅行資料夾</h2>
+        <span>票券、離線地圖、預訂提醒、餐廳與注意事項都放在這裡。</span>
+      </div>
+      <div class="other-stack">
+        <details class="info-group" open>
+          <summary>文件票券</summary>
+          <div class="info-body">
+            <p class="install-note">收機票、訂房確認、Klook/KKday QR code（大象公園、夜safari、Dream World）和泰鐵票券。先把旅伴加進清單，上傳後檔案會放到你的 Google Drive 並分享給他們。</p>
+            <form id="docForm">
+              <div class="form-row">
+                <label>文件名稱
+                  <input id="docTitle" placeholder="例如：MaiChi Villa、Sala Danang Beach Hotel" required />
+                </label>
+                <label>分類
+                  <select id="docCategory">
+                    <option>簽證</option>
+                    <option>機票</option>
+                    <option>住宿</option>
+                    <option>活動票券</option>
+                    <option>交通</option>
+                    <option>其他</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>住宿起日
+                  <select id="docStayStart">
+                    <option value="">不套用住宿</option>
+                  </select>
+                </label>
+                <label>住宿迄日
+                  <select id="docStayEnd">
+                    <option value="">不套用住宿</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span><input id="docApplyHotel" type="checkbox" /> 如果分類是住宿，上傳後同步更新每日住宿點</span>
+              </label>
+              <div class="form-row">
+                <label>文件費用金額
+                  <input id="docExpenseAmount" type="number" inputmode="decimal" min="0" step="1" placeholder="可留空，系統會嘗試從名稱/檔名偵測" />
+                </label>
+                <label>費用幣別
+                  <select id="docExpenseCurrency">
+                    <option value="VND">VND 越南盾</option>
+                    <option value="NTD">NTD 台幣</option>
+                    <option value="USD">USD 美金</option>
+                  </select>
+                </label>
+              </div>
+              <label>花費分類
+                <select id="docExpenseCategory">
+                  <option>交通</option>
+                  <option>餐飲</option>
+                  <option>門票</option>
+                  <option>住宿</option>
+                  <option>購物</option>
+                  <option>其他</option>
+                </select>
+              </label>
+              <label>
+                <span><input id="docCreateExpense" type="checkbox" /> 偵測到或填寫費用時，同步建立一筆花費</span>
+              </label>
+              <label>選擇 PDF 或圖片
+                <input id="docFile" type="file" accept="application/pdf,image/*" required />
+              </label>
+              <button class="btn primary" type="submit">加入文件</button>
+            </form>
+            <p class="status" id="docStatus">請先填文件名稱並選擇 PDF 或圖片，再按加入文件。</p>
+            <div class="doc-grid" id="docList"></div>
+          </div>
+        </details>
+
+        <details class="info-group" open>
+          <summary>離線地圖準備</summary>
+          <div class="info-body">
+            <p class="install-note">網頁不能直接下載 Google Maps 離線圖資。出國前請用 Google Maps App 下載「清邁、清萊、曼谷」周邊區域；下面清單可逐一打開地點確認，下載完成後勾選。</p>
+            <h3>建議下載方式</h3>
+            <ul>
+              <li>Google Maps App 搜尋「Chiang Mai」或「Bangkok」。</li>
+              <li>點選個人頭像 → 離線地圖 → 選取自己的地圖。</li>
+              <li>框住清邁古城及周邊（含大象公園方向）；清萊和曼谷建議各另下載一張。</li>
+              <li>下載後開飛航模式測試一次，確認景點搜尋和路線仍可用。</li>
+            </ul>
+            <p class="offline-progress" id="offlineProgress">離線準備：0 / 0</p>
+            <div class="offline-list" id="offlineList"></div>
+          </div>
+        </details>
+
+        <details class="info-group" open>
+          <summary>預訂手冊</summary>
+          <div class="info-body">
+            <h3>出發前必辦</h3>
+            <ul>
+              <li>護照效期確認：入境泰國需護照效期 6 個月以上；台灣護照免簽，停留不超過 30 天。</li>
+              <li>倫理大象保育：1/25，提前至 <a href="https://www.elephantnaturepark.org/" target="_blank" rel="noreferrer">Elephant Nature Park 官網</a> 預約（熱門，建議 1–2 個月前訂）。</li>
+              <li>清邁夜間野生動物園：1/23 晚上，可現場購票或事先查 <a href="https://www.klook.com/zh-TW/search/result/?query=Chiang+Mai+Night+Safari" target="_blank" rel="noreferrer">Klook</a>、<a href="https://www.kkday.com/zh-tw/product/productlist/A01-001-00001?keyword=Chiang+Mai+Night+Safari" target="_blank" rel="noreferrer">KKday</a> 比價。</li>
+              <li>清萊一日遊交通：1/27，包車或搭巴士前往清萊，可查 <a href="https://www.klook.com/zh-TW/search/result/?query=Chiang+Rai+day+trip+from+Chiang+Mai" target="_blank" rel="noreferrer">Klook 包車行程</a>，或至清邁拱廊巴士站（Arcade Bus Terminal）查班次。</li>
+              <li>臥鋪火車票：1/29 18:00 清邁→曼谷，提前至 <a href="https://www.thairailticket.com/esrt/index.aspx" target="_blank" rel="noreferrer">thairailticket.com</a> 購票，建議訂二等空調臥鋪（2nd Class AC Sleeper）。</li>
+              <li>Dream World（備案）：2/1，出發前存好 <a href="https://www.klook.com/zh-TW/search/result/?query=Dream+World+Bangkok" target="_blank" rel="noreferrer">Klook 票券</a> 或至 <a href="https://www.dreamworld.co.th/" target="_blank" rel="noreferrer">官網</a> 購票 QR code。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="info-group">
+          <summary>餐廳推薦</summary>
+          <div class="info-body">
+            <h3>清邁</h3>
+            <ul>
+              <li>Khao Soi Mae Sai：米其林必比登推薦，泰北咖哩麵（Khao Soi）名店，雞腿咖哩麵約 55 泰銖，道地且超值。</li>
+              <li>Huen Muan Jai：米其林必比登，泰北拼盤可一次嚐到香腸、咖哩豬、炸豬皮等經典。</li>
+              <li>MEENA Rice Based Cuisine：五色飯糰搭配泰北重口味料理，連續多年米其林必比登推薦。</li>
+              <li>Neng Earthen Jar Roast Pork：脆皮烤豬（Moo Krop），酥脆多汁，小份約 70 泰銖。</li>
+              <li>週日步行街路邊攤：炸物、烤肉串、椰子冰淇淋，邊走邊吃最道地。</li>
+            </ul>
+            <h3>曼谷</h3>
+            <ul>
+              <li>Pier 21（Terminal 21 5F）：平價美食廣場，打拋豬 30 泰銖、芒果糯米 35 泰銖，本地人最愛。</li>
+              <li>Nara Thai Cuisine（Terminal 21 內）：精緻泰式料理，冬蔭功、炒蟹，適合最後一晚正式聚餐。</li>
+              <li>Big C 超市美食區：熟食區可買炸雞、壽司捲、泰式點心，採買伴手禮順便解決一餐。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="info-group">
+          <summary>文化禁忌與旅行提醒</summary>
+          <div class="info-body">
+            <ul>
+              <li>寺廟、皇城等宗教或歷史場所，避免穿著過短；必要時帶薄外套或披巾。</li>
+              <li>進入部分室內或宗教空間前留意是否需要脫鞋。</li>
+              <li>市場與路邊攤議價保持禮貌，先確認幣別與數量。</li>
+              <li>搭 Grab 前確認車牌與目的地，夜間移動以叫車為主。</li>
+              <li>飲用水以瓶裝水為主，冰塊和生食視腸胃狀況斟酌。</li>
+              <li>熱門景點注意隨身物品，手機拍照後不要放桌邊。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="info-group">
+          <summary>資料來源</summary>
+          <div class="info-body">
+            <ul>
+              <li><a href="https://www.elephantnaturepark.org/" target="_blank" rel="noreferrer">Elephant Nature Park 官網預約</a></li>
+              <li><a href="https://www.thairailticket.com/esrt/index.aspx" target="_blank" rel="noreferrer">泰鐵官網購票 thairailticket.com</a></li>
+              <li><a href="https://www.dreamworld.co.th/" target="_blank" rel="noreferrer">Dream World Bangkok 官方網站</a></li>
+              <li><a href="https://www.klook.com/zh-TW/" target="_blank" rel="noreferrer">Klook</a>、<a href="https://www.kkday.com/zh-tw/" target="_blank" rel="noreferrer">KKday</a></li>
+              <li><a href="https://chiangmai.airportthai.co.th/" target="_blank" rel="noreferrer">清邁機場官網</a>、<a href="https://suvarnabhumiairport.com/" target="_blank" rel="noreferrer">蘇旺納蓬機場官網</a></li>
+              <li>原本行程表中的住宿、餐廳、活動與費用估算。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <dialog id="placeDialog">
+    <div class="modal-body">
+      <h2 id="placeTitle">景點介紹</h2>
+      <p id="placeIntro"></p>
+      <h3>參考遊記</h3>
+      <ul class="place-links" id="placeLinks"></ul>
+      <div class="actions">
+        <a class="map-link primary" id="placeMap" href="#" target="_blank" rel="noreferrer">開 Google Maps</a>
+        <button class="btn" type="button" id="closePlaceDialog">關閉</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="hotelDialog">
+    <div class="modal-body">
+      <h2>更改住宿區間</h2>
+      <p class="install-note">選擇幾月幾號到幾月幾號住在哪裡，系統會一次更新這段日期的住宿與行程中的住宿站點。</p>
+      <form id="hotelForm">
+        <div class="form-row">
+          <label>開始日期
+            <select id="hotelStart"></select>
+          </label>
+          <label>結束日期
+            <select id="hotelEnd"></select>
+          </label>
+        </div>
+        <label>住宿名稱
+          <input id="hotelName" placeholder="例如：Hoi An Majestic Villa" required />
+        </label>
+        <div class="actions">
+          <button class="btn primary" type="submit">套用住宿</button>
+          <button class="btn" type="button" id="closeHotelDialog">取消</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <div class="modal-body">
+      <h2>共用旅行手冊</h2>
+      <p class="install-note">登入後，大家可以一起更新花費、心得、住宿與旅伴清單。照片和票券會存到上傳者的 Google Drive，並分享給清單內的旅伴。</p>
+      <h3>同步狀態</h3>
+      <p id="dataMode" class="status">讀取中...</p>
+      <h3>旅伴清單</h3>
+      <p class="status">輸入旅伴的 Google email。清單內的人登入後可以一起編輯，也會收到之後上傳檔案的讀取權限。</p>
+      <form id="memberForm">
+        <label>旅伴 Google email
+          <input id="memberEmail" type="email" placeholder="friend@gmail.com" />
+        </label>
+        <button class="btn primary" type="submit">加入旅伴</button>
+      </form>
+      <div class="list" id="memberList"></div>
+      <h3>檔案分享提醒</h3>
+      <p class="status">建議先加入旅伴再上傳照片或票券。先前已上傳的檔案若要補分享，請到 Google Drive 的 Vietnam Travel Handbook 資料夾手動調整權限。</p>
+      <div class="actions">
+        <button class="btn warn" type="button" id="clearLocalBtn">清除這台手機資料</button>
+        <a class="map-link" href="https://drive.google.com/" target="_blank" rel="noreferrer">開啟 Google Drive</a>
+        <button class="btn" type="button" id="closeSettingsDialog">關閉</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="./firebase-config.js"></script>
+  <script src="./firebase-config.local.js"></script>
+  <script>
+window.TRIP_CONFIG = {
+  tripId: "thailand-chiangmai-2027",
+  today: "2027-01-23",
+  documentTitle: "2027 泰國清邁・曼谷旅行手冊",
+  brand: "Thailand 2027",
+  heroTitle: "清邁・曼谷<br />手機旅行手冊",
+  heroSubtitle: "2027/1/23–2/2，清邁 7 夜・臥鋪火車 1 夜・曼谷 1 夜。行程內保留 Google Maps 連結，景點名稱可點開介紹，住宿也能臨時修改。",
+  heroHint: "往下滑看每日路線；登入後可同步花費、心得、照片與文件。",
+  heroImage: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1600&q=80",
+  themeColor: "#c47a2a",
+  chips: [
+    "CNX 清邁機場入 / BKK 蘇旺納蓬出",
+    "清邁・清萊・曼谷",
+    "1 NTD ≈ 1.1 THB"
+  ],
+  days: [
+    {
+      date: "1/23", weekday: "六", city: "chiangmai",
+      title: "抵達清邁", hotel: "（飯店待填）",
+      note: "10:25 落地，入住休息，晚上清邁夜間野生動物園。",
+      stops: [
+        ["10:25", "清邁國際機場", "入境泰國，領取行李，換匯後用 Grab 或宋條前往飯店。", "Chiang Mai International Airport CNX"],
+        ["下午", "飯店 check-in", "入住整頓，自由活動。", ""],
+        ["晚上", "清邁夜間野生動物園", "泰國最大夜間動物園，可搭導覽車近距離觀賞夜行動物，有手餵長頸鹿體驗及雷射噴泉秀。", "Chiang Mai Night Safari"]
+      ]
+    },
+    {
+      date: "1/24", weekday: "日", city: "chiangmai",
+      title: "泰式料理課與週日夜市", hotel: "（飯店待填）",
+      note: "08:30 料理課出發，午餐吃自己做的，傍晚逛週日步行街。",
+      stops: [
+        ["08:30", "泰式農場料理課", "全日課程含市場採購與親手烹煮，每人獨立灶台，13:00 前結束，含接送與食譜。", "Thai Farm Cooking School Chiang Mai"],
+        ["13:00", "午餐（自己做）", "享用課程完成的泰式料理成果。", "Thai Farm Cooking School Chiang Mai"],
+        ["下午", "飯店休息", "下午自由活動。", ""],
+        ["17:00", "週日步行街", "清邁最大步行夜市（拉差當嫩路），手工藝品、木雕、銀飾與街頭美食，全長約 1.1 公里。", "Sunday Walking Street Chiang Mai Ratchadamnoen Road"]
+      ]
+    },
+    {
+      date: "1/25", weekday: "一", city: "chiangmai",
+      title: "倫理大象保育（全日）", hotel: "（飯店待填）",
+      note: "大象自然公園全日行程，含餐與接送，清邁最具聲譽的倫理大象保育地。",
+      stops: [
+        ["全日", "大象自然公園", "救援大象保育中心，可近距離觀察大象自然行為、洗澡餵食，不提供騎乘，全日含餐。", "Elephant Nature Park Chiang Mai"]
+      ]
+    },
+    {
+      date: "1/26", weekday: "二", city: "chiangrai",
+      title: "清萊一日包車遊", hotel: "（飯店待填）",
+      note: "包車全日遊清萊三大地標：白廟、藍廟、黑屋。清邁車程約 2.5–3 小時。",
+      stops: [
+        ["上午", "白廟 Wat Rong Khun", "純白鏡面馬賽克寺廟，入口橋象徵越過慾望，門票 200 泰銖，請著遮蓋衣物入場。", "Wat Rong Khun White Temple Chiang Rai"],
+        ["中午", "藍廟 Wat Rong Suea Ten", "深寶藍色現代寺廟，免費入場，傍晚光線最美，距清萊市中心約 3 公里。", "Wat Rong Suea Ten Blue Temple Chiang Rai"],
+        ["下午", "黑屋 Baan Dam Museum", "藝術大師 Thawan Duchanee 的黑色藝術莊園，40 多棟深色建築，門票 80 泰銖。", "Baan Dam Museum Black House Chiang Rai"],
+        ["傍晚", "返回清邁", "包車返程，車程約 2.5–3 小時。", ""]
+      ]
+    },
+    {
+      date: "1/27", weekday: "三", city: "chiangmai",
+      title: "飛索冒險與傘村彩繪", hotel: "（飯店待填）",
+      note: "清邁東方 Doi Saket 飛索體驗，順路傘村彩繪，下午自由活動。",
+      stops: [
+        ["上午", "Sky Hawk 飛索 Doi Saket", "34 條高空滑索橫跨熱帶雨林，套票含接送與午餐，建議提早預約。", "Sky Hawk Zipline Doi Saket Chiang Mai"],
+        ["下午", "Bo Sang 傘村彩繪", "百年傳統手工藝村，觀看現場製傘並可付費彩繪迷你傘，Doi Saket 返程順路。", "Bo Sang Umbrella Village Chiang Mai"],
+        ["傍晚", "自由活動", "返回清邁市區，自由安排。", ""]
+      ]
+    },
+    {
+      date: "1/28", weekday: "四", city: "chiangmai",
+      title: "大峽谷水上樂園與靈應寺", hotel: "（飯店待填）",
+      note: "上午南方大峽谷玩水，下午西北方素帖山靈應寺，記得帶換洗衣物。",
+      stops: [
+        ["上午", "清邁大峽谷水上樂園", "廢棄採石場積水天然峽谷，充氣浮島、高跳台，票價約 950 泰銖，帶換洗衣物與防曬。", "Grand Canyon Water Park Chiang Mai"],
+        ["下午", "素帖山靈應寺 Doi Suthep", "北泰最神聖佛寺，海拔 1,073 公尺，爬 309 級石階或搭纜車，門票 30 泰銖，俯瞰清邁全景。", "Wat Phra That Doi Suthep Chiang Mai"],
+        ["傍晚", "自由活動", "返回清邁市區，自由安排。", ""]
+      ]
+    },
+    {
+      date: "1/29", weekday: "五", city: "chiangmai",
+      title: "黏黏瀑布・古城寺廟・臥鋪出發", hotel: "臥鋪火車",
+      note: "上午北方黏黏瀑布，下午古城漫步，18:00 清邁站搭臥鋪火車前往曼谷。",
+      stops: [
+        ["上午", "黏黏瀑布 Bua Tong", "岩石覆滿碳酸鈣可赤腳攀爬不滑的奇特瀑布，距市區約 60 公里，免費入場，11月–4月乾季最佳。", "Namtok Bua Tong Sticky Waterfall Chiang Mai"],
+        ["下午", "帕辛寺 Wat Phra Singh", "清邁最重要蘭納式寺廟，精緻殿堂與鍍金大塔，門票 50 泰銖。", "Wat Phra Singh Chiang Mai"],
+        ["下午", "柴迪隆寺 Wat Chedi Luang", "14 世紀大塔地震斷頂遺跡，每日傍晚有僧侶問答活動（Monk Chat），免費參觀。", "Wat Chedi Luang Chiang Mai"],
+        ["18:00", "清邁火車站出發", "搭泰鐵臥鋪火車前往曼谷，翌日 07:00 抵達，帶換洗衣物與眼罩耳塞。", "Chiang Mai Railway Station"]
+      ]
+    },
+    {
+      date: "1/30", weekday: "六", city: "bangkok",
+      title: "抵曼谷・整頓・Terminal 21", hotel: "（飯店待填）",
+      note: "07:00 抵達曼谷新中央車站，前往飯店整頓洗漱，下午逛 Terminal 21。",
+      stops: [
+        ["07:00", "曼谷中央車站 Krung Thep Aphiwat", "臥鋪火車終點，2023 年啟用的新曼谷火車總站，搭 MRT Blue Line 或 Grab 前往飯店。", "Krung Thep Aphiwat Central Terminal Bangkok"],
+        ["上午", "飯店 check-in 整頓", "放行李、洗漱休息補眠。", ""],
+        ["下午", "Terminal 21 Asok", "機場主題購物商城，5 樓 Pier 21 平價泰式美食廣場，直連 BTS Asok 站及 MRT Sukhumvit 站。", "Terminal 21 Asok Bangkok"]
+      ]
+    },
+    {
+      date: "1/31", weekday: "日", city: "bangkok",
+      title: "最後採買・自由活動",  hotel: "（飯店待填）",
+      note: "Big C 最後掃貨，下午自由活動放鬆，為最後一夜養精蓄銳。",
+      stops: [
+        ["上午", "Big C Chit Lom", "大型量販超市，泰國零食、伴手禮、保養品採購，消費滿 2,000 泰銖可辦 VAT 退稅。", "Big C Supercenter Ratchadamri Chit Lom Bangkok"],
+        ["下午", "自由活動・按摩放鬆", "市區閒逛或泰式按摩，為深夜長途飛行儲備體力。", ""]
+      ]
+    },
+    {
+      date: "2/1", weekday: "一", city: "bangkok",
+      title: "Dream World 備案・深夜前往機場", hotel: "機場",
+      note: "備案 A：Dream World 主題樂園；備案 B：市區按摩休息。傍晚整理行李，22:30 前往蘇旺納蓬機場，2/2 凌晨 02:35 起飛返台。",
+      stops: [
+        ["上午", "備案 A：Dream World Bangkok", "曼谷近郊大型主題樂園，有雲霄飛車、水上設施及室內雪地奇緣（Snow Town），距市區約 45 分鐘 Grab 車程，建議提前購票。", "Dream World Bangkok"],
+        ["下午", "備案 A：Dream World 繼續 ／ 備案 B：市區按摩休息", "依體力決定繼續遊樂園，或返回市區享受泰式按摩放鬆，準備深夜出發。", ""],
+        ["傍晚", "最後整理行李", "飯店退房，確認所有行李、護照、登機證。", ""],
+        ["22:30", "蘇旺納蓬國際機場", "出發前往機場辦理登機，2/2 凌晨 02:35 起飛返台。", "Suvarnabhumi Airport Bangkok"]
+      ]
+    }
+  ],
+  placeDetails: {
+    "Chiang Mai International Airport CNX": "清邁國際機場（CNX）距舊城區僅 10–20 分鐘車程。入境後可在1樓換匯或提領泰銖，建議備用金 10,000 泰銖以上。可搭 Grab 叫車或宋條（紅色計程車）前往市區，車資約 100–150 泰銖。",
+    "Chiang Mai Night Safari": "泰國第一座夜間動物園，分「掠食者漫步區」、「熱帶草原區」及「美洲豹小徑」三區，可搭導覽車近距離觀賞老虎、獅子、長頸鹿等夜行動物，並有手餵長頸鹿體驗及雷射噴泉秀。票價成人 1,200 泰銖，傍晚入場最佳。",
+    "Thai Farm Cooking School Chiang Mai": "清邁歷史最悠久的有機農場烹飪學校，距市區約 17 公里。課程含市場採購、每人獨立灶台烹煮，食材均來自自家有機農場。附冷氣接送、午餐及食譜，全程約 08:30–13:00。",
+    "Sunday Walking Street Chiang Mai Ratchadamnoen Road": "清邁週日夜市（拉差當嫩路，非 Wualai 週六夜市），每週日 17:00 至午夜開放，全長約 1.1 公里。手工藝品、木雕、銀飾、布藝及各式街頭小吃，晚間 7–10 時人潮最旺，建議提早入場。",
+    "Elephant Nature Park Chiang Mai": "由保育人士 Lek Chailert 於 1995 年創立，清邁最具聲譽的倫理大象救援中心，園內收容逾 75 頭象。可近距離觀察大象洗澡、餵食，不提供騎乘，全日行程含餐與接送。收益直接用於大象救援。",
+    "Wat Rong Khun White Temple Chiang Rai": "泰國藝術家 Kositpipat 自費建造，以純白外牆嵌入鏡面馬賽克為特色，象徵佛陀的純淨。入口橋伸出無數雙手象徵慾望束縛。距清萊市中心約 13 公里，門票 200 泰銖，開放 08:00–17:00，請著遮蓋衣物。",
+    "Wat Rong Suea Ten Blue Temple Chiang Rai": "2016 年建成的深寶藍色現代寺廟，「虎舞之家」，融合傳統泰式雕刻與現代美學。距清萊市中心僅 3 公里，免費入場，07:00–20:00 開放，傍晚光線最美，人潮較少。",
+    "Baan Dam Museum Black House Chiang Rai": "已故藝術大師 Thawan Duchanee 的畢生創作莊園，40 多棟深色木造建築收藏雕塑、動物骨骸，呈現黑暗哲學意涵。距清萊市中心約 10 公里，門票 80 泰銖，09:00–17:00（午休 12:00–13:00）。",
+    "Sky Hawk Zipline Doi Saket Chiang Mai": "清邁東部 Doi Saket 的高空飛索體驗，設有 34 條橫跨熱帶雨林的滑索，最長路線俯瞰 360 度山林，採用美國 Petzl 安全設備。套票含來回接送、午餐及紀念品，建議提前線上預約。",
+    "Bo Sang Umbrella Village Chiang Mai": "超過百年歷史的傳統手工藝村，以手工製作桑皮紙傘（Sa paper umbrella）聞名。可免費觀看師傅現場彩繪製傘，並付費親手彩繪迷你傘作紀念品。距清邁市區東方約 9 公里，Doi Saket 返程順路。",
+    "Grand Canyon Water Park Chiang Mai": "廢棄石灰岩採石場積水形成的天然峽谷，設有充氣浮島、10 公尺高跳台及高空飛索。票價約 950 泰銖，需強制穿戴救生衣。位於南方 Hang Dong，距舊城約 40 分鐘，記得帶換洗衣物。",
+    "Wat Phra That Doi Suthep Chiang Mai": "建於 1383 年，海拔 1,073 公尺的北泰最神聖佛寺，供奉佛陀舍利子。需攀登 309 級石階或搭纜車，可俯瞰清邁全市壯觀景色。門票 30 泰銖，請著遮蓋肩膀與膝蓋衣物入場。",
+    "Namtok Bua Tong Sticky Waterfall Chiang Mai": "岩石表面覆滿碳酸鈣礦物質，形成如海綿般的抓地力，可赤腳直接攀爬水流不滑倒的世界奇景。位於 Mae Taeng 縣，距清邁約 60 公里，免費入場，乾季（11月–4月）為最佳造訪時節。",
+    "Wat Phra Singh Chiang Mai": "建於 1345 年，清邁最重要的蘭納式寺廟，以精緻「萊坎毗哈拉」殿堂及四面裝飾大象浮雕的鍍金大塔著稱。門票 50 泰銖，09:00–18:00 開放，距三王紀念碑步行約 5 分鐘。",
+    "Wat Chedi Luang Chiang Mai": "14 世紀興建的大塔曾是清邁最高建築，惜因地震留下震撼斷頂遺跡。寺內設有千年菩提樹，每日傍晚有僧侶問答（Monk Chat），可自由與僧侶交流。免費參觀（部分區域門票 40 泰銖）。",
+    "Chiang Mai Railway Station": "清邁火車站位於市區東方 Charoen Muang 路，是泰鐵北部幹線終點站。臥鋪火車每日下午至傍晚出發，抵達曼谷約需 12–13 小時。建議提前在 thairailticket.com 訂票，記得帶換洗衣物、眼罩與耳塞。",
+    "Krung Thep Aphiwat Central Terminal Bangkok": "2023 年啟用的曼谷新火車總站（取代舊版華藍蓬站），位於 Bang Sue，設施現代寬敞。可搭 MRT 藍線（Bang Sue Grand Station 站）或 Grab 前往市區各飯店，車程約 20–40 分鐘。",
+    "Terminal 21 Asok Bangkok": "以國際機場航廈為主題的曼谷購物商城，每層以世界城市命名裝潢（羅馬、倫敦、東京、舊金山等）。直接連通 BTS Asok 站及 MRT Sukhumvit 站，5 樓 Pier 21 美食廣場是曼谷最受歡迎的平價泰式料理廣場。",
+    "Big C Supercenter Ratchadamri Chit Lom Bangkok": "BTS 奇隆站（Chit Lom）步行約 5 分鐘的大型量販超市，採購泰國零食、伴手禮、保養品的必逛據點，消費滿 2,000 泰銖可辦 VAT 退稅。館內有 Daiso，可人行天橋連接 Central World 百貨。",
+    "Suvarnabhumi Airport Bangkok": "曼谷蘇旺納蓬國際機場（BKK），距市區約 30–50 分鐘車程，建議提前 2.5–3 小時到機場辦理登機。可搭 Airport Rail Link 或 Grab 前往，深夜班機請確認 Rail Link 末班時間（約 24:00 前）。",
+    "Dream World Bangkok": "曼谷近郊的大型主題樂園，距市區約 45 公里，設有「夢幻世界」主題區、水上樂園、雲霄飛車及室內雪地奇緣（Snow Town）。票價成人約 600–800 泰銖（含 Snow Town 套票），開放 10:00–17:00（週末至 18:00）。建議搭 Grab 前往，車程約 40–50 分鐘，停留 5–6 小時最佳。"
+  },
+  placeReferences: {
+    "Chiang Mai International Airport CNX": [
+      ["清邁機場交通全攻略｜CNX Local", "https://cnxlocal.com/a-digital-nomads-guide-to-cnx-chiang-mai-international-airport/"],
+      ["清邁機場官方網站", "https://chiangmai.airportthai.co.th/"]
+    ],
+    "Chiang Mai Night Safari": [
+      ["清邁夜間野生動物園｜Tourism Thailand", "https://www.tourismthailand.org/Attraction/chiang-mai-night-safari"]
+    ],
+    "Thai Farm Cooking School Chiang Mai": [
+      ["Thai Farm Cooking School 官方網站", "https://thaifarmcooking.com/"]
+    ],
+    "Sunday Walking Street Chiang Mai Ratchadamnoen Road": [
+      ["清邁週日夜市完整攻略｜Backpackers Wanderlust", "https://www.backpackerswanderlust.com/chiang-mai-sunday-night-market-thailand/"]
+    ],
+    "Elephant Nature Park Chiang Mai": [
+      ["Elephant Nature Park 官方預約", "https://www.elephantnaturepark.org/"]
+    ],
+    "Wat Rong Khun White Temple Chiang Rai": [
+      ["白廟旅遊攻略｜Chiang Rai Guide", "https://www.chiangraiguide.com/en/categories/attractions/wat-rong-khun/"]
+    ],
+    "Wat Rong Suea Ten Blue Temple Chiang Rai": [
+      ["清萊藍廟介紹｜Closer Lives", "https://www.closerlives.com/blog/post/the-blue-temple-chiang-rai-wat-rong-suea-ten"]
+    ],
+    "Baan Dam Museum Black House Chiang Rai": [
+      ["清萊黑屋攻略｜The Longest Way Home", "https://www.thelongestwayhome.com/travel-guides/thailand/chiang-rai/baandam-museum-black-house-temple.html"]
+    ],
+    "Sky Hawk Zipline Doi Saket Chiang Mai": [
+      ["Sky Hawk Zipline 官方網站", "https://www.skyhawkchiangmai.com/"],
+      ["GetYourGuide 線上訂票", "https://www.getyourguide.com/chiang-mai-l271/chiang-mai-sky-hawk-zipline-adventure-with-optional-atv-t836188/"]
+    ],
+    "Bo Sang Umbrella Village Chiang Mai": [
+      ["傘村與傘節攻略｜A Little Adrift", "https://alittleadrift.com/bo-sang-umbrella-festival/"]
+    ],
+    "Grand Canyon Water Park Chiang Mai": [
+      ["清邁大峽谷官方網站", "https://grandcanyon-waterpark.com/en/"],
+      ["大峽谷水上樂園攻略｜The Backpacking Family", "https://thebackpackingfamily.com/grand-canyon-chiang-mai-water-park/"]
+    ],
+    "Wat Phra That Doi Suthep Chiang Mai": [
+      ["素帖山靈應寺介紹｜Chiang Mai Traveller", "https://www.chiangmaitraveller.com/doi-suthep-temple/"]
+    ],
+    "Namtok Bua Tong Sticky Waterfall Chiang Mai": [
+      ["黏黏瀑布完整攻略｜Two Wandering Soles", "https://www.twowanderingsoles.com/blog/sticky-waterfall-bua-tong-chiang-mai"]
+    ],
+    "Wat Phra Singh Chiang Mai": [
+      ["帕辛寺介紹｜The Not-So-Innocents Abroad", "https://www.thenotsoinnocentsabroad.com/blog/must-see-chiang-mai-wat-phra-singh"]
+    ],
+    "Wat Chedi Luang Chiang Mai": [
+      ["柴迪隆寺介紹｜The Not-So-Innocents Abroad", "https://www.thenotsoinnocentsabroad.com/blog/wat-chedi-luang-a-main-chiang-mai-attraction"]
+    ],
+    "Terminal 21 Asok Bangkok": [
+      ["Terminal 21 官方網站", "https://www.terminal21.co.th/"]
+    ],
+    "Big C Supercenter Ratchadamri Chit Lom Bangkok": [
+      ["Big C 伴手禮採購指南｜The Ordinary Katalog", "https://theordinarykatalog.com/big-c-supermarket-bangkok/"]
+    ],
+    "Dream World Bangkok": [
+      ["Dream World 官方網站", "https://www.dreamworld.co.th/"],
+      ["Dream World 遊玩攻略｜Klook", "https://www.klook.com/en-US/activity/1520-dream-world-bangkok/"]
+    ]
+  }
+};
+  </script>
+  <script>
+    const firebaseConfig = window.FIREBASE_CONFIG || {
+      apiKey: "",
+      authDomain: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: "",
+      appId: ""
+    };
+
+    const mapUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    const tripConfig = window.TRIP_CONFIG || {};
+    const today = tripConfig.today || "2026-07-18";
+    const tripId = tripConfig.tripId || "vietnam-2026-da-nang";
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    const defaultPlaceDetails = {
+      "Da Nang International Airport": "峴港國際機場是這趟旅程進出的機場，距離峴港市區約 10-20 分鐘車程，到會安約 45-55 分鐘。建議抵達後直接用 Grab 叫車。",
+      "MaiChi Villa Hoi An": "會安住宿點，適合作為古鎮、占婆島、美山聖地與 VinWonders 的前半段基地。若住宿更換，可在每日行程卡按「改住宿」。",
+      "Sala Danang Beach Hotel": "峴港海邊飯店，適合作為美溪沙灘、韓市場、龍橋、巴拿山與順化一日遊的後半段基地。",
+      "Hoi An Ancient Town": "會安古鎮是 UNESCO 世界文化遺產，以燈籠、河岸老街、會館、古宅與夜間散步聞名。傍晚到晚上最有氣氛，也較適合拍照。",
+      "Banh Mi Phuong Hoi An": "會安知名法國麵包店，常見排隊人潮。適合當抵達會安後的輕食或點心。",
+      "Morning Glory Original Hoi An": "會安古鎮內的人氣越南菜餐廳，適合安排在占婆島回來後的晚餐。",
+      "Com Ga Ba Buoi Hoi An": "會安雞飯名店，適合美山聖地回程後當午餐。",
+      "Pho Xua Hoi An": "會安古鎮附近的河粉餐廳，適合晚上輕鬆吃。",
+      "Mi Quang Ong Hai Hoi An": "廣南麵是峴港、會安一帶特色料理，湯汁較少、配料豐富。",
+      "Hoi An Memories Show": "大型戶外實景秀，主題圍繞會安歷史與文化。建議提早入場並預先存好訂票 QR code。",
+      "Cham Island Hoi An": "占婆島是會安外海島嶼，常見行程包含浮潛、海灘、午餐與接送。很吃天氣，建議準備防曬和暈船藥。",
+      "My Son Sanctuary": "美山聖地是占婆王國遺跡，屬 UNESCO 世界遺產。早上去較不熱，拍照和步行都舒服一些。",
+      "VinWonders Nam Hoi An": "大型主題樂園，包含遊樂設施、動物區、水上活動等。建議確認接駁與門票規則。",
+      "Marble Mountains Da Nang": "五行山位於會安到峴港路上，有洞穴、寺廟與觀景點。上下階梯較多，鞋子要好走。",
+      "My Khe Beach Da Nang": "美溪沙灘是峴港代表海灘，適合早晨或傍晚散步。中午日曬很強。",
+      "Dragon Bridge Da Nang": "龍橋是峴港地標，週末晚上常有噴火噴水表演。周邊人潮多，建議提早到。",
+      "Han Market Da Nang": "韓市場適合採買咖啡、腰果、伴手禮與衣物。記得確認價格、數量與幣別。",
+      "Pizza 4P's Da Nang": "越南人氣日式義式餐廳，適合作為剛到峴港、想吃比較穩定口味的晚餐。",
+      "Madame Lan Da Nang": "峴港大型越南菜餐廳，菜色選擇多，適合家庭或多人用餐。",
+      "Bun Cha Ca 109 Da Nang": "峴港魚板米線餐廳，是當地特色小吃之一。",
+      "Hai San Be Man Da Nang": "峴港海鮮餐廳，適合想吃海鮮的一晚。點餐前先確認時價。",
+      "LUK LAK Da Nang": "峴港晚餐候選餐廳，適合彈性日或巴拿山回來後安排。",
+      "Da Nang Railway Station": "峴港火車站，可作為前往順化的交通選項。若搭火車，出發前確認班次與月台。",
+      "Imperial City Hue": "順化皇城是越南阮朝古都核心，範圍很大，建議保留 2-3 小時。",
+      "Thien Mu Pagoda Hue": "天姥寺位於香江旁，是順化代表性古寺之一，常與皇城排在同一天。",
+      "Ba Na Hills Da Nang": "巴拿山是峴港近郊高山樂園，以纜車、法國村與金橋聞名。山上天氣變化大。",
+      "Golden Bridge Ba Na Hills": "金橋是巴拿山最知名拍照點，若想避人潮建議一早先去。",
+      "Cong Caphe Da Nang": "越南連鎖咖啡店，以椰子咖啡聞名，適合下午休息。",
+      "Linh Ung Pagoda Son Tra Da Nang": "山茶半島上的靈應寺可看海景與大型觀音像，適合作為彈性日行程。"
+    };
+
+    const defaultPlaceReferences = {
+      "Hoi An Ancient Town": [
+        ["會安自由行攻略｜Pengu Travel", "https://pengu777.com/hoian-travel/"]
+      ],
+      "Hoi An Memories Show": [
+        ["會安印象秀心得｜Wander with Debbie", "https://debbiechien.com/hoi-an-memories-show/"],
+        ["印象會安交通票價｜Teresa 的旅遊筆記", "https://www.teresablog.com/blog/post/hoi-an-memories-show"]
+      ],
+      "Cham Island Hoi An": [
+        ["占婆島潛水與島上心得｜方格子", "https://vocus.cc/article/676e7061fd8978000140a480"],
+        ["Cham Island 完整旅遊指南｜Local Vietnam", "https://localvietnam.com/quang-nam/hoi-an/cham-island-travel-guide/"]
+      ],
+      "My Son Sanctuary": [
+        ["美山聖地半日遊｜Wander with Debbie", "https://debbiechien.com/my-son-sanctuary/"],
+        ["美山聖地｜肉比頭", "https://zoebitalk.com/central-vietnam-my-son/"]
+      ],
+      "VinWonders Nam Hoi An": [
+        ["VinWonders 官方資訊", "https://vinwonders.com/vinwonders-nam-hoi-an/"]
+      ],
+      "Marble Mountains Da Nang": [
+        ["五行山攻略｜Wander with Debbie", "https://debbiechien.com/marble-mountains/"],
+        ["五行山漫遊｜許傑旅行圖中", "https://journey.tw/marble-mountain/"]
+      ],
+      "My Khe Beach Da Nang": [
+        ["峴港景點整理｜肉比頭", "https://zoebitalk.com/vietnam/central-vietnam/da-nang/"]
+      ],
+      "Dragon Bridge Da Nang": [
+        ["峴港景點整理｜肉比頭", "https://zoebitalk.com/vietnam/central-vietnam/da-nang/"]
+      ],
+      "Han Market Da Nang": [
+        ["峴港景點整理｜肉比頭", "https://zoebitalk.com/vietnam/central-vietnam/da-nang/"]
+      ],
+      "Imperial City Hue": [
+        ["順化自由行與皇城｜肉比頭", "https://zoebitalk.com/vietnam/central-vietnam/hue/"],
+        ["順化一日遊｜時空旅人札記", "https://blog.travelhackfun.com/hue-day-trip/"]
+      ],
+      "Thien Mu Pagoda Hue": [
+        ["順化一日遊含天姥寺｜時空旅人札記", "https://blog.travelhackfun.com/hue-day-trip/"]
+      ],
+      "Ba Na Hills Da Nang": [
+        ["巴拿山攻略｜混血珊莎", "https://sansalife.tw/ba-na-hills/"],
+        ["巴拿山與金橋攻略｜Eva 旅遊", "https://evatravel.tw/ba-na-hills/"]
+      ],
+      "Golden Bridge Ba Na Hills": [
+        ["巴拿山攻略｜混血珊莎", "https://sansalife.tw/ba-na-hills/"],
+        ["巴拿山與金橋攻略｜Eva 旅遊", "https://evatravel.tw/ba-na-hills/"]
+      ],
+      "Linh Ung Pagoda Son Tra Da Nang": [
+        ["峴港景點整理｜肉比頭", "https://zoebitalk.com/vietnam/central-vietnam/da-nang/"]
+      ]
+    };
+
+    const defaultDays = [
+      { date: "7/18", weekday: "六", city: "hoi", title: "抵達峴港，前往會安", hotel: "MaiChi Villa", note: "機場到會安約 45-55 分鐘，晚上安排會安印象秀。", stops: [
+        ["08:50", "抵達峴港國際機場", "領行李後用 Grab 前往會安。", "Da Nang International Airport"],
+        ["中午", "MaiChi Villa Hoi An", "寄放行李或辦理入住。", "MaiChi Villa Hoi An"],
+        ["下午", "會安古鎮", "先輕鬆散步、熟悉路線。", "Hoi An Ancient Town"],
+        ["晚餐", "Banh Mi Phuong", "經典會安法國麵包。", "Banh Mi Phuong Hoi An"],
+        ["20:00", "會安印象秀", "建議提早抵達取票入場。", "Hoi An Memories Show"]
+      ]},
+      { date: "7/19", weekday: "日", city: "hoi", title: "占婆島一日遊", hotel: "MaiChi Villa", note: "海島行程以天氣為準，泳衣、防曬、暈船藥先放小包。", stops: [
+        ["07:30", "占婆島 Cham Island", "一日遊集合出發。", "Cham Island Hoi An"],
+        ["15:00", "返回會安", "回飯店休息，避免排太滿。", "MaiChi Villa Hoi An"],
+        ["晚餐", "Morning Glory Original", "會安古鎮人氣越南菜。", "Morning Glory Original Hoi An"]
+      ]},
+      { date: "7/20", weekday: "一", city: "hoi", title: "美山聖地與古鎮散步", hotel: "MaiChi Villa", note: "上午世界遺產，下午回會安慢慢逛。", stops: [
+        ["07:00", "美山聖地", "UNESCO 世界遺產，早去比較不熱。", "My Son Sanctuary"],
+        ["午餐", "Cơm Gà Bà Buội", "會安雞飯。", "Com Ga Ba Buoi Hoi An"],
+        ["下午", "會安古鎮", "咖啡、河岸、燈籠街。", "Hoi An Ancient Town"],
+        ["晚餐", "Pho Xua", "古鎮附近晚餐候選。", "Pho Xua Hoi An"]
+      ]},
+      { date: "7/21", weekday: "二", city: "hoi", title: "VinWonders Nam Hoi An", hotel: "MaiChi Villa", note: "全天樂園日，先確認接駁時間與門票 QR code。", stops: [
+        ["09:00", "VinWonders Nam Hoi An", "樂園、動物區、水上設施。", "VinWonders Nam Hoi An"],
+        ["18:00", "返回會安", "看體力決定晚餐。", "MaiChi Villa Hoi An"],
+        ["晚餐", "Mì Quảng Ông Hai", "廣南麵，回程後簡單吃。", "Mi Quang Ong Hai Hoi An"]
+      ]},
+      { date: "7/22", weekday: "三", city: "da", title: "會安移動到峴港", hotel: "Sala Danang Beach Hotel", note: "退房後往峴港，可順路安排五行山或海邊。", stops: [
+        ["上午", "會安古鎮", "退房前最後散步或買小物。", "Hoi An Ancient Town"],
+        ["中午", "五行山", "會安到峴港路上可順遊。", "Marble Mountains Da Nang"],
+        ["下午", "Sala Danang Beach Hotel", "入住峴港海邊飯店。", "Sala Danang Beach Hotel"],
+        ["晚餐", "Pizza 4P's Đà Nẵng", "抵達峴港第一晚餐。", "Pizza 4P's Da Nang"]
+      ]},
+      { date: "7/23", weekday: "四", city: "da", title: "峴港市區與海灘", hotel: "Sala Danang Beach Hotel", note: "輕鬆市區日，適合補眠、換匯、採買。", stops: [
+        ["上午", "美溪沙灘", "飯店附近散步拍照。", "My Khe Beach Da Nang"],
+        ["中午", "Bún Chả Cá 109", "魚板米線。", "Bun Cha Ca 109 Da Nang"],
+        ["下午", "韓市場", "伴手禮、咖啡、腰果。", "Han Market Da Nang"],
+        ["晚餐", "Madame Lan", "峴港經典越南菜。", "Madame Lan Da Nang"]
+      ]},
+      { date: "7/24", weekday: "五", city: "hue", title: "順化一日遊", hotel: "Sala Danang Beach Hotel", note: "早上搭車或火車去順化，晚上回峴港。", stops: [
+        ["07:50", "峴港到順化", "可搭火車 HD 或包車。", "Da Nang Railway Station"],
+        ["上午", "順化皇城", "保留 2-3 小時慢慢逛。", "Imperial City Hue"],
+        ["下午", "天姥寺", "香江旁古寺。", "Thien Mu Pagoda Hue"],
+        ["18:00", "返回峴港", "Limo minivan 或包車回飯店。", "Sala Danang Beach Hotel"]
+      ]},
+      { date: "7/25", weekday: "六", city: "da", title: "海邊、咖啡與龍橋夜景", hotel: "Sala Danang Beach Hotel", note: "晚上 21:00 留意龍橋噴火噴水，週末人潮多。", stops: [
+        ["上午", "美溪沙灘", "自由活動。", "My Khe Beach Da Nang"],
+        ["下午", "Cong Ca Phe", "越南椰子咖啡。", "Cong Caphe Da Nang"],
+        ["晚餐", "Hải Sản Bé Mặn", "海鮮餐廳。", "Hai San Be Man Da Nang"],
+        ["21:00", "龍橋", "週末噴火噴水。", "Dragon Bridge Da Nang"]
+      ]},
+      { date: "7/26", weekday: "日", city: "da", title: "巴拿山與金橋", hotel: "Sala Danang Beach Hotel", note: "山上天氣變化大，帶薄外套；早點出發避開人潮。", stops: [
+        ["07:00", "出發前往巴拿山", "Grab/包車或一日遊接送。", "Ba Na Hills Da Nang"],
+        ["上午", "金橋 Golden Bridge", "先拍手掌橋。", "Golden Bridge Ba Na Hills"],
+        ["下午", "巴拿山園區", "纜車、法國村、室內樂園。", "Ba Na Hills Da Nang"],
+        ["晚餐", "LUK LAK", "回峴港後晚餐候選。", "LUK LAK Da Nang"]
+      ]},
+      { date: "7/27", weekday: "一", city: "da", title: "彈性日與最後採買", hotel: "Sala Danang Beach Hotel", note: "保留給天氣備案、按摩、採買或再去喜歡的餐廳。", stops: [
+        ["上午", "山茶半島 / 靈應寺", "視天氣與體力決定。", "Linh Ung Pagoda Son Tra Da Nang"],
+        ["下午", "韓市場", "最後採買。", "Han Market Da Nang"],
+        ["晚餐", "Hải Sản Bé Mặn 或 LUK LAK", "選一間想回訪的餐廳。", "Hai San Be Man Da Nang"]
+      ]},
+      { date: "7/28", weekday: "二", city: "da", title: "退房，返回台灣", hotel: "機場", note: "17:35 DAD 起飛，建議 15:00 抵達機場。", stops: [
+        ["上午", "美溪沙灘", "最後散步或咖啡。", "My Khe Beach Da Nang"],
+        ["中午", "韓市場 / 餐廳", "補買伴手禮。", "Han Market Da Nang"],
+        ["15:00", "峴港國際機場", "辦理登機。", "Da Nang International Airport"],
+        ["17:35", "DAD → TPE", "21:25 抵達台北。", "Da Nang International Airport"]
+      ]}
+    ];
+
+    const placeDetails = tripConfig.placeDetails || defaultPlaceDetails;
+    const placeReferences = tripConfig.placeReferences || defaultPlaceReferences;
+    const days = tripConfig.days || defaultDays;
+
+    const state = {
+      expenses: JSON.parse(localStorage.getItem("chiangmai2027Expenses") || "[]"),
+      journals: JSON.parse(localStorage.getItem("chiangmai2027Journals") || "[]"),
+      hotels: JSON.parse(localStorage.getItem("chiangmai2027Hotels") || "{}"),
+      offline: JSON.parse(localStorage.getItem("chiangmai2027OfflineMaps") || "{}"),
+      members: JSON.parse(localStorage.getItem("chiangmai2027TripMembers") || "[]"),
+      docs: JSON.parse(localStorage.getItem("chiangmai2027Docs") || "[]"),
+      photos: [],
+      photoFiles: []
+    };
+    let selectedDayIndex = Number(localStorage.getItem("chiangmai2027SelectedDay") || "0");
+    if (!Number.isFinite(selectedDayIndex) || selectedDayIndex < 0 || selectedDayIndex >= days.length) {
+      selectedDayIndex = 0;
+    }
+
+    const hasFirebaseConfig = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId);
+    let cloud = null;
+    let currentUser = null;
+    let authReady = !hasFirebaseConfig;
+    let googleAuth = null;
+    let googleProvider = null;
+    let googleAuthProviderApi = null;
+    let googleSignInWithPopup = null;
+    let driveAccessToken = "";
+    let driveFolderId = "";
+    const categoryColors = {
+      "交通": "#0f5a49",
+      "餐飲": "#d49a2a",
+      "門票": "#1d4f7a",
+      "住宿": "#7b3e25",
+      "購物": "#9b4d96",
+      "其他": "#65736d"
+    };
+
+    $("#expenseDate").value = today;
+    $("#journalDate").value = today;
+
+    function applyTripConfig() {
+      if (tripConfig.documentTitle) document.title = tripConfig.documentTitle;
+      if (tripConfig.themeColor) {
+        document.documentElement.style.setProperty("--hoi", tripConfig.themeColor);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", tripConfig.themeColor);
+      }
+      if (tripConfig.heroImage) {
+        $(".hero").style.background = `linear-gradient(180deg, rgba(13, 55, 45, .10), rgba(13, 55, 45, .80)), url("${tripConfig.heroImage}") center/cover`;
+      }
+      if (tripConfig.brand) $(".brand").textContent = tripConfig.brand;
+      if (tripConfig.heroTitle) $(".hero h1").innerHTML = tripConfig.heroTitle;
+      if (tripConfig.heroSubtitle) $(".hero p").textContent = tripConfig.heroSubtitle;
+      if (Array.isArray(tripConfig.chips)) {
+        $(".chips").innerHTML = tripConfig.chips.map((chip) => `<span class="chip">${chip}</span>`).join("");
+      }
+      if (tripConfig.heroHint) $(".next-peek").textContent = tripConfig.heroHint;
+    }
+
+    function saveLocal() {
+      localStorage.setItem("chiangmai2027Expenses", JSON.stringify(state.expenses));
+      localStorage.setItem("chiangmai2027Journals", JSON.stringify(state.journals));
+      localStorage.setItem("chiangmai2027Hotels", JSON.stringify(state.hotels));
+      localStorage.setItem("chiangmai2027OfflineMaps", JSON.stringify(state.offline));
+      localStorage.setItem("chiangmai2027TripMembers", JSON.stringify(state.members));
+      localStorage.setItem("chiangmai2027Docs", JSON.stringify(state.docs));
+    }
+
+    function offlineStops() {
+      const seen = new Map();
+      days.forEach((day) => {
+        day.stops.map((stop) => stopWithCurrentHotel(day, stop)).forEach(([time, name, note, query]) => {
+          if (!seen.has(query)) {
+            seen.set(query, { date: day.date, time, name, note, query });
+          }
+        });
+      });
+      return Array.from(seen.values());
+    }
+
+    function selectedDay() {
+      return days[selectedDayIndex] || days[0];
+    }
+
+    function fullDateForDay(day) {
+      const year = String(today).slice(0, 4) || "2026";
+      const [month, date] = day.date.split("/").map((value) => value.padStart(2, "0"));
+      return `${year}-${month}-${date}`;
+    }
+
+    function selectedDateValue() {
+      return fullDateForDay(selectedDay());
+    }
+
+    function stopWithCurrentHotel(day, stop) {
+      const hotel = state.hotels[day.date] || day.hotel;
+      const originalHotel = day.hotel || "";
+      const [time, name, note, query] = stop;
+      const normalize = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]/g, "");
+      const original = normalize(originalHotel);
+      const stopName = normalize(name);
+      const stopQuery = normalize(query);
+      const isHotelStop = original && (
+        stopName === original ||
+        stopQuery === original ||
+        stopName.includes(original) ||
+        stopQuery.includes(original) ||
+        original.includes(stopName) ||
+        original.includes(stopQuery)
+      );
+      return isHotelStop ? [time, hotel, note, hotel] : stop;
+    }
+
+    function expenseDisplayDate(item) {
+      return item.scope === "trip" || !item.date ? "整趟旅程" : item.date;
+    }
+
+    function syncExpenseScope() {
+      const isTripExpense = $("#expenseScope").value === "trip";
+      $("#expenseDate").disabled = isTripExpense;
+      $("#expenseDate").required = !isTripExpense;
+      if (isTripExpense) {
+        $("#expenseDate").value = "";
+        $("#expenseScopeHint").textContent = "整趟旅程費用適合機票、簽證、保險、住宿訂金等不屬於單一天的支出。";
+      } else {
+        $("#expenseDate").value ||= selectedDateValue();
+        $("#expenseScopeHint").textContent = "每日花費會列到選取日期；機票、簽證、保險、住宿訂金可改選整趟旅程。";
+      }
+    }
+
+    function setSelectedDay(index) {
+      selectedDayIndex = Math.max(0, Math.min(days.length - 1, Number(index)));
+      localStorage.setItem("chiangmai2027SelectedDay", String(selectedDayIndex));
+      if ($("#expenseScope").value !== "trip") $("#expenseDate").value = selectedDateValue();
+      $("#journalDate").value = selectedDateValue();
+      renderDayHub();
+      renderItinerary();
+      renderExpenses();
+      renderJournals();
+    }
+
+    function renderDayHub() {
+      $("#dateStrip").innerHTML = days.map((item, index) => {
+        const [month, date] = item.date.split("/");
+        return `
+          <button class="date-pill ${index === selectedDayIndex ? "active" : ""}" type="button" data-select-day="${index}">
+            <small>D${index + 1} · ${item.weekday}</small>
+            <b>${date}</b>
+            <span>${month}月</span>
+          </button>
+        `;
+      }).join("");
+      $("#dayProgress").textContent = `Day ${selectedDayIndex + 1} / ${days.length}`;
+    }
+
+    function renderItinerary() {
+      const root = $("#itinerary");
+      const day = selectedDay();
+      root.innerHTML = `
+        <div class="section-head">
+          <h2>${day.date} 每日行程</h2>
+          <span>Day ${selectedDayIndex + 1} / ${days.length} · 景點名稱可看介紹，地圖連結只保留在行程內。</span>
+        </div>
+      `;
+      [day].forEach((day) => {
+        const hotel = state.hotels[day.date] || day.hotel;
+        const card = document.createElement("article");
+        card.className = "day-card";
+        card.innerHTML = `
+          <div class="day-top">
+            <div class="date ${day.city === "da" ? "da" : day.city === "hue" ? "hue" : ""}">
+              <b>${day.date}</b><small>週${day.weekday}</small>
+            </div>
+            <div class="summary">
+              <h3>${day.title}</h3>
+              <p>${day.note}</p>
+              <div class="hotel-line">
+                <span class="note">住宿：<b>${hotel}</b></span>
+                <button class="mini-btn" type="button" data-edit-hotel="${day.date}">改住宿</button>
+              </div>
+            </div>
+          </div>
+          <div class="day-body">
+            <ul class="timeline">
+              ${day.stops.map((stop) => {
+                const [time, name, note, query] = stopWithCurrentHotel(day, stop);
+                return `
+                <li>
+                  <span class="time">${time}</span>
+                  <span>
+                    <button class="spot-btn" type="button" data-place="${encodeURIComponent(query)}" data-place-name="${encodeURIComponent(name)}">${name}</button>
+                    <span class="note">${note}</span>
+                    <span class="actions">
+                      <button class="btn" type="button" data-place="${encodeURIComponent(query)}" data-place-name="${encodeURIComponent(name)}">介紹</button>
+                      <a class="map-link primary" href="${mapUrl(query)}" target="_blank" rel="noreferrer">開地圖</a>
+                    </span>
+                  </span>
+                </li>
+              `;
+              }).join("")}
+            </ul>
+          </div>
+        `;
+        root.appendChild(card);
+      });
+    }
+
+    function stayDateOptions(emptyLabel = "") {
+      const options = emptyLabel ? [`<option value="">${emptyLabel}</option>`] : [];
+      return options
+        .concat(days.map((day) => `<option value="${day.date}">${day.date} 週${day.weekday}</option>`))
+        .join("");
+    }
+
+    function renderStayDateOptions() {
+      const docOptions = stayDateOptions("不套用住宿");
+      $("#docStayStart").innerHTML = docOptions;
+      $("#docStayEnd").innerHTML = docOptions;
+      const hotelOptions = stayDateOptions();
+      $("#hotelStart").innerHTML = hotelOptions;
+      $("#hotelEnd").innerHTML = hotelOptions;
+    }
+
+    function openHotelDialog(date) {
+      const day = days.find((item) => item.date === date) || selectedDay();
+      const current = state.hotels[day.date] || day.hotel || "";
+      $("#hotelStart").value = day.date;
+      $("#hotelEnd").value = day.date;
+      $("#hotelName").value = current;
+      $("#hotelDialog").showModal();
+    }
+
+    function applyHotelFromDoc(title, startDate, endDate) {
+      if (!title || !startDate || !endDate) return false;
+      const startIndex = days.findIndex((day) => day.date === startDate);
+      const endIndex = days.findIndex((day) => day.date === endDate);
+      if (startIndex < 0 || endIndex < 0) return false;
+      const from = Math.min(startIndex, endIndex);
+      const to = Math.max(startIndex, endIndex);
+      days.slice(from, to + 1).forEach((day) => {
+        state.hotels[day.date] = title;
+      });
+      return true;
+    }
+
+    function toNtd(amount, currency) {
+      const value = Number(amount || 0);
+      if (currency === "VND") return value / 780;
+      if (currency === "USD") return value * 32;
+      return value;
+    }
+
+    function guessCategory(text, fallback = "其他") {
+      const lower = text.toLowerCase();
+      if (/hotel|villa|住宿|訂房|booking|agoda/.test(lower)) return "住宿";
+      if (/visa|evisa|簽證/.test(lower)) return "其他";
+      if (/grab|taxi|flight|air|機票|交通|train|rail|bus|minivan/.test(lower)) return "交通";
+      if (/klook|kkday|ticket|票|門票|show|vinwonders|ba na|巴拿|印象秀/.test(lower)) return "門票";
+      if (/restaurant|food|coffee|餐|飯|麵|banh|pizza|cafe/.test(lower)) return "餐飲";
+      if (/market|shopping|伴手禮|購物/.test(lower)) return "購物";
+      return fallback;
+    }
+
+    function detectExpenseFromText(text) {
+      const source = text.replace(/,/g, "");
+      const currencyBefore = source.match(/\b(USD|VND|NTD|TWD)\s*([$]?\s*)?(\d+(?:\.\d+)?)/i);
+      const currencyAfter = source.match(/(\d+(?:\.\d+)?)\s*(USD|VND|NTD|TWD)\b/i);
+      const match = currencyBefore || currencyAfter;
+      if (!match) return null;
+      const currency = (currencyBefore ? match[1] : match[2]).toUpperCase().replace("TWD", "NTD");
+      const amount = Number(currencyBefore ? match[3] : match[1]);
+      if (!amount) return null;
+      return {
+        amount,
+        currency,
+        category: guessCategory(source)
+      };
+    }
+
+    async function createExpenseFromDetected({ title, amount, currency, category, note, scope = "trip", date = "" }) {
+      const item = {
+        scope,
+        date: scope === "trip" ? "" : (date || selectedDateValue()),
+        currency,
+        title,
+        amount: Number(amount),
+        category,
+        note: note || "",
+        createdAt: new Date().toISOString()
+      };
+      item.id = await saveCloudRecord("expenses", item);
+      state.expenses.unshift(item);
+      saveLocal();
+      renderExpenses();
+      renderDayHub();
+    }
+
+    function renderExpenses() {
+      const visibleExpenses = [...state.expenses].sort((a, b) => {
+        if ((a.scope === "trip" || !a.date) && b.date) return -1;
+        if ((b.scope === "trip" || !b.date) && a.date) return 1;
+        return String(b.date || "").localeCompare(String(a.date || ""));
+      });
+      const total = visibleExpenses.reduce((sum, item) => sum + toNtd(item.amount, item.currency), 0);
+      $("#expenseTotal").textContent = `NTD ${Math.round(total).toLocaleString("zh-TW")}`;
+      $("#expenseList").innerHTML = visibleExpenses.length ? visibleExpenses.map((item) => {
+        const index = state.expenses.indexOf(item);
+        return `
+        <div class="record">
+          <strong><span>${item.title}</span><span>${Number(item.amount).toLocaleString("zh-TW")} ${item.currency}</span></strong>
+          <small>${expenseDisplayDate(item)} · ${item.category} · 約 NTD ${Math.round(toNtd(item.amount, item.currency)).toLocaleString("zh-TW")}</small>
+          <button class="btn" type="button" data-remove-expense="${index}">刪除</button>
+        </div>
+      `;
+      }).join("") : `<p class="status">目前還沒有花費紀錄。旅行開始前這裡可以先空著；到現場再逐筆新增即可。</p>`;
+      renderExpenseChart(visibleExpenses);
+    }
+
+    function renderExpenseChart(expenseItems = state.expenses) {
+      const canvas = $("#expenseChart");
+      const legend = $("#expenseLegend");
+      const ctx = canvas.getContext("2d");
+      const size = canvas.width;
+      const center = size / 2;
+      const radius = size / 2 - 8;
+      const totals = expenseItems.reduce((acc, item) => {
+        acc[item.category] = (acc[item.category] || 0) + toNtd(item.amount, item.currency);
+        return acc;
+      }, {});
+      const entries = Object.entries(totals).filter(([, value]) => value > 0);
+      const sum = entries.reduce((acc, [, value]) => acc + value, 0);
+
+      ctx.clearRect(0, 0, size, size);
+      if (!sum) {
+        ctx.beginPath();
+        ctx.arc(center, center, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#eee8dc";
+        ctx.fill();
+        ctx.fillStyle = "#65736d";
+        ctx.font = "700 15px Noto Sans TC, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("尚無資料", center, center);
+        legend.innerHTML = `<p class="status">新增花費後，這裡會顯示各分類支出比例。</p>`;
+        return;
+      }
+
+      let start = -Math.PI / 2;
+      entries.forEach(([category, value]) => {
+        const angle = (value / sum) * Math.PI * 2;
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, radius, start, start + angle);
+        ctx.closePath();
+        ctx.fillStyle = categoryColors[category] || categoryColors["其他"];
+        ctx.fill();
+        start += angle;
+      });
+      ctx.beginPath();
+      ctx.arc(center, center, radius * .52, 0, Math.PI * 2);
+      ctx.fillStyle = "#fffdfa";
+      ctx.fill();
+      ctx.fillStyle = "#17211d";
+      ctx.font = "900 14px Noto Sans TC, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("總支出", center, center - 9);
+      ctx.font = "900 16px Noto Sans TC, sans-serif";
+      ctx.fillText(`NTD ${Math.round(sum).toLocaleString("zh-TW")}`, center, center + 12);
+
+      legend.innerHTML = entries
+        .sort((a, b) => b[1] - a[1])
+        .map(([category, value]) => {
+          const percent = Math.round((value / sum) * 100);
+          return `
+            <div class="legend-row">
+              <span class="legend-dot" style="background:${categoryColors[category] || categoryColors["其他"]}"></span>
+              <span>${category} · NTD ${Math.round(value).toLocaleString("zh-TW")}</span>
+              <strong>${percent}%</strong>
+            </div>
+          `;
+        }).join("");
+    }
+
+    function renderJournals() {
+      $("#journalList").innerHTML = days.map((day, dayIndex) => {
+        const dateValue = fullDateForDay(day);
+        const dayJournals = state.journals.filter((item) => item.date === dateValue);
+        const records = dayJournals.length ? dayJournals.map((item) => {
+          const index = state.journals.indexOf(item);
+          const photos = (item.photos || []).map((photo) => {
+            const src = typeof photo === "string" ? photo : (photo.thumbnailLink || photo.url || photo.webViewLink || "");
+            const href = typeof photo === "string" ? photo : (photo.webViewLink || photo.url || src);
+            return src
+              ? `<a href="${href}" target="_blank" rel="noreferrer"><img src="${src}" alt="旅遊照片" loading="lazy" /></a>`
+              : "";
+          }).join("");
+          return `
+            <article class="record">
+              <strong><span>${item.place || "旅行紀錄"}</span><span>${item.date}</span></strong>
+              <small>${item.text}</small>
+              ${photos ? `<div class="photos">${photos}</div>` : ""}
+              <button class="btn" type="button" data-remove-journal="${index}">刪除</button>
+            </article>
+          `;
+        }).join("") : `<p class="status">這一天還沒有心得。</p>`;
+        return `
+          <section class="day-record-group">
+            <div class="day-record-head">
+              <span>D${dayIndex + 1} · ${day.date} 週${day.weekday}</span>
+              <span>${day.title}</span>
+            </div>
+            ${records}
+          </section>
+      `;
+      }).join("");
+    }
+
+    function renderPhotoPreview() {
+      $("#photoPreview").innerHTML = state.photos.map((src) => `<img src="${src}" alt="待上傳照片預覽" />`).join("");
+    }
+
+    function renderOfflineList() {
+      const stops = offlineStops();
+      const done = stops.filter((item) => state.offline[item.query]).length;
+      $("#offlineProgress").textContent = `離線準備：${done} / ${stops.length}`;
+      $("#offlineList").innerHTML = stops.map((item) => `
+        <label class="offline-item">
+          <input type="checkbox" data-offline-map="${encodeURIComponent(item.query)}" ${state.offline[item.query] ? "checked" : ""} />
+          <span>
+            <strong>${item.name}</strong>
+            <small>${item.date} · ${item.note}</small>
+            <span class="actions">
+              <a class="map-link" href="${mapUrl(item.query)}" target="_blank" rel="noreferrer">開地圖確認</a>
+            </span>
+          </span>
+        </label>
+      `).join("");
+    }
+
+    function renderMembers() {
+      $("#memberList").innerHTML = state.members.length ? state.members.map((email, index) => `
+        <div class="member-row">
+          <strong>${email}</strong>
+          <button class="btn" type="button" data-remove-member="${index}">移除</button>
+        </div>
+      `).join("") : `<p class="status">尚未加入旅伴。你自己的 Google 帳號登入後會自動成為擁有者。</p>`;
+    }
+
+    function renderDocs() {
+      $("#docList").innerHTML = state.docs.length ? state.docs.map((doc, index) => {
+        const isImage = doc.type?.startsWith("image/");
+        const openUrl = doc.webViewLink || doc.url;
+        const previewUrl = doc.thumbnailLink || doc.url;
+        const preview = isImage
+          ? `<img src="${previewUrl}" alt="${doc.title}" loading="lazy" />`
+          : `<div class="install-note">PDF 文件：${doc.fileName}</div>`;
+        return `
+          <article class="doc-card">
+            ${preview}
+            <span class="doc-type">${doc.category}</span>
+            <strong>${doc.title}</strong>
+            <small>${doc.fileName}</small>
+            <div class="actions">
+              <a class="map-link primary" href="${openUrl}" target="_blank" rel="noreferrer">開啟</a>
+              <button class="btn" type="button" data-remove-doc="${index}">刪除</button>
+            </div>
+          </article>
+        `;
+      }).join("") : `<p class="status">還沒有文件。之後機票、QR code、訂房確認、泰鐵票都可以放這裡。</p>`;
+    }
+
+    async function syncMembersToCloud() {
+      if (!cloud || !currentUser) return;
+      const { deleteDoc, doc, setDoc } = cloud.firestore;
+      for (const email of state.members) {
+        await setDoc(doc(cloud.db, "trips", tripId, "members", email), {
+          email,
+          role: "editor",
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      }
+      if (syncMembersToCloud.removedEmail) {
+        await deleteDoc(doc(cloud.db, "trips", tripId, "members", syncMembersToCloud.removedEmail));
+        syncMembersToCloud.removedEmail = "";
+      }
+    }
+
+    async function loadCloudData() {
+      if (!cloud || !currentUser) return;
+      const { collection, doc, getDoc, getDocs, orderBy, query, setDoc } = cloud.firestore;
+      await setDoc(doc(cloud.db, "trips", tripId, "members", currentUser.email), {
+        email: currentUser.email,
+        displayName: currentUser.displayName || "",
+        role: "owner",
+        updatedAt: new Date().toISOString()
+      }, { merge: true });
+      for (const email of state.members) {
+        await setDoc(doc(cloud.db, "trips", tripId, "members", email), {
+          email,
+          role: "editor",
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      }
+      const tripDoc = await getDoc(doc(cloud.db, "trips", tripId));
+      if (!tripDoc.exists()) {
+        await setDoc(doc(cloud.db, "trips", tripId), {
+          title: "2027 泰國清邁・曼谷旅行",
+          ownerEmail: currentUser.email,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      }
+      const expenseSnap = await getDocs(query(collection(cloud.db, "trips", tripId, "expenses"), orderBy("createdAt", "desc")));
+      const journalSnap = await getDocs(query(collection(cloud.db, "trips", tripId, "journals"), orderBy("createdAt", "desc")));
+      const memberSnap = await getDocs(query(collection(cloud.db, "trips", tripId, "members"), orderBy("email", "asc")));
+      const docSnap = await getDocs(query(collection(cloud.db, "trips", tripId, "docs"), orderBy("createdAt", "desc")));
+      state.expenses = expenseSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      state.journals = journalSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      state.members = memberSnap.docs.map((doc) => doc.data().email).filter((email) => email && email !== currentUser.email);
+      state.docs = docSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      saveLocal();
+      renderExpenses();
+      renderJournals();
+      renderMembers();
+      renderDocs();
+      updateEditLock();
+    }
+
+    async function saveCloudRecord(type, payload) {
+      if (!cloud || !currentUser) return null;
+      const { addDoc, collection } = cloud.firestore;
+      const ref = await addDoc(collection(cloud.db, "trips", tripId, type), {
+        ...payload,
+        updatedBy: currentUser.email || currentUser.uid
+      });
+      return ref.id;
+    }
+
+    async function deleteCloudRecord(type, id) {
+      if (!cloud || !currentUser || !id) return;
+      const { deleteDoc, doc } = cloud.firestore;
+      await deleteDoc(doc(cloud.db, "trips", tripId, type, id));
+    }
+
+    function captureDriveToken(result) {
+      if (!result || !googleAuthProviderApi?.credentialFromResult) return;
+      try {
+        const credential = googleAuthProviderApi.credentialFromResult(result);
+        if (credential?.accessToken) driveAccessToken = credential.accessToken;
+      } catch (error) {
+        console.warn("Google credential result did not include a Drive token.", error);
+      }
+    }
+
+    async function ensureDriveAccess() {
+      if (driveAccessToken) return driveAccessToken;
+      if (!googleAuth || !googleProvider || !googleSignInWithPopup) {
+        throw new Error("雲端檔案功能還沒準備好，請重新整理後再試。");
+      }
+      $("#dataMode").textContent = "需要 Google Drive 授權，才能上傳照片與票券。";
+      const result = await googleSignInWithPopup(googleAuth, googleProvider);
+      captureDriveToken(result);
+      if (!driveAccessToken) throw new Error("沒有取得 Google Drive 上傳權限。請重新登入後再試。");
+      return driveAccessToken;
+    }
+
+    async function driveFetch(url, options = {}) {
+      const token = await ensureDriveAccess();
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          ...(options.headers || {})
+        }
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Google Drive API ${response.status}: ${text || response.statusText}`);
+      }
+      return response;
+    }
+
+    async function ensureDriveFolder() {
+      if (driveFolderId) return driveFolderId;
+      const folderName = "Vietnam Travel Handbook";
+      const q = encodeURIComponent(`mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`);
+      const search = await driveFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name)&pageSize=1`);
+      const result = await search.json();
+      if (result.files?.[0]?.id) {
+        driveFolderId = result.files[0].id;
+        return driveFolderId;
+      }
+      const create = await driveFetch("https://www.googleapis.com/drive/v3/files?fields=id,name", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify({
+          name: folderName,
+          mimeType: "application/vnd.google-apps.folder"
+        })
+      });
+      const folder = await create.json();
+      driveFolderId = folder.id;
+      return driveFolderId;
+    }
+
+    async function uploadDriveFile(file, kind) {
+      const folderId = await ensureDriveFolder();
+      const safeName = file.name.replace(/[^\w.\-\u4e00-\u9fff]/g, "_");
+      const boundary = `chiangmai2027-drive-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      const metadata = {
+        name: `${new Date().toISOString().slice(0, 10)}-${kind}-${safeName}`,
+        mimeType: file.type || "application/octet-stream",
+        parents: [folderId]
+      };
+      const body = new Blob([
+        `--${boundary}\r\n`,
+        "Content-Type: application/json; charset=UTF-8\r\n\r\n",
+        JSON.stringify(metadata),
+        `\r\n--${boundary}\r\n`,
+        `Content-Type: ${metadata.mimeType}\r\n\r\n`,
+        file,
+        `\r\n--${boundary}--`
+      ], { type: `multipart/related; boundary=${boundary}` });
+      const upload = await driveFetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,webViewLink,webContentLink,thumbnailLink", {
+        method: "POST",
+        headers: { "Content-Type": `multipart/related; boundary=${boundary}` },
+        body
+      });
+      return upload.json();
+    }
+
+    async function shareDriveFileWithMembers(fileId) {
+      if (!fileId) return [];
+      const recipients = state.members
+        .map((email) => email.trim().toLowerCase())
+        .filter((email) => email && email !== currentUser?.email?.toLowerCase());
+      const uniqueRecipients = [...new Set(recipients)];
+      const failures = [];
+      for (const email of uniqueRecipients) {
+        try {
+          await driveFetch(`https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}/permissions?sendNotificationEmail=false&fields=id`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+              type: "user",
+              role: "reader",
+              emailAddress: email
+            })
+          });
+        } catch (error) {
+          console.warn(`Unable to share Drive file with ${email}`, error);
+          failures.push(email);
+        }
+      }
+      if (failures.length) {
+        $("#dataMode").textContent = `檔案已上傳，但 ${failures.length} 位旅伴的分享失敗，請稍後重試或到 Google Drive 手動分享。`;
+      }
+      return failures;
+    }
+
+    async function uploadCloudPhotos() {
+      if (!currentUser || !state.photoFiles.length) return state.photos;
+      try {
+        const uploads = await Promise.all(state.photoFiles.map((file) => uploadDriveFile(file, "journal")));
+        await Promise.all(uploads.map((file) => shareDriveFileWithMembers(file.id)));
+        return uploads.map((file) => ({
+          driveFileId: file.id,
+          name: file.name,
+          type: file.mimeType,
+          url: file.webContentLink || file.webViewLink,
+          webViewLink: file.webViewLink,
+          thumbnailLink: file.thumbnailLink || file.webContentLink || file.webViewLink,
+          provider: "google-drive"
+        }));
+      } catch (error) {
+        console.warn("Google Drive upload unavailable; keeping journal photos locally.", error);
+        alert(`照片上傳到 Google Drive 失敗，先保留在這台手機：${error.message || "請稍後再試"}`);
+        return state.photos;
+      }
+    }
+
+    async function uploadCloudDoc(file) {
+      if (!currentUser || !file) return null;
+      try {
+        const uploaded = await uploadDriveFile(file, "document");
+        await shareDriveFileWithMembers(uploaded.id);
+        return {
+          driveFileId: uploaded.id,
+          url: uploaded.webContentLink || uploaded.webViewLink,
+          webViewLink: uploaded.webViewLink,
+          thumbnailLink: uploaded.thumbnailLink || "",
+          provider: "google-drive"
+        };
+      } catch (error) {
+        console.warn("Google Drive upload unavailable; keeping document locally.", error);
+        alert(`文件上傳到 Google Drive 失敗，先保留在這台手機：${error.message || "請稍後再試"}`);
+        return null;
+      }
+    }
+
+    function activatePanel(panelName, shouldScroll = true) {
+      const panel = $(`#${panelName}`);
+      const tab = document.querySelector(`.tab[data-panel="${panelName}"]`);
+      if (!panel || !tab) return;
+      $$(".tab").forEach((item) => item.classList.remove("active"));
+      $$(".panel").forEach((item) => item.classList.remove("active"));
+      tab.classList.add("active");
+      panel.classList.add("active");
+      if (shouldScroll) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function requireEditor() {
+      if (currentUser) return true;
+      if (hasFirebaseConfig && !authReady) {
+        const message = "正在確認 Google 登入狀態，請稍等幾秒後再試。";
+        $("#dataMode").textContent = message;
+        alert(message);
+        return false;
+      }
+      const message = hasFirebaseConfig
+        ? "請先使用 Google 登入，才能編輯共用旅程資料。"
+        : "目前尚未完成雲端設定，暫時只能瀏覽行程，不能新增或修改共用資料。";
+      $("#dataMode").textContent = message;
+      alert(message);
+      return false;
+    }
+
+    function updateEditLock() {
+      const unlocked = Boolean(currentUser);
+      const selectors = [
+        "#hotelForm input", "#hotelForm select", "#hotelForm button[type='submit']",
+        "#expenseForm input", "#expenseForm select", "#expenseForm button",
+        "#journalForm input", "#journalForm textarea", "#journalForm button",
+        "#docForm input", "#docForm select", "#docForm button",
+        "#memberForm input", "#memberForm button",
+        "[data-edit-hotel]", "[data-remove-expense]", "[data-remove-journal]",
+        "[data-remove-member]", "[data-remove-doc]", "[data-offline-map]", "#clearLocalBtn"
+      ];
+      document.querySelectorAll(selectors.join(",")).forEach((element) => {
+        element.disabled = !unlocked;
+        element.title = unlocked
+          ? ""
+          : authReady
+            ? "請先使用 Google 登入，才能編輯共用旅程資料。"
+            : "正在確認 Google 登入狀態。";
+      });
+    }
+
+    $$(".tab").forEach((tab) => {
+      tab.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        activatePanel(tab.dataset.panel);
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const clicked = event.target;
+      const selectDay = clicked.closest("[data-select-day]")?.dataset.selectDay;
+      const hotelDate = clicked.closest("[data-edit-hotel]")?.dataset.editHotel;
+      const placeTarget = clicked.closest("[data-place]");
+      const placeQuery = placeTarget?.dataset.place;
+      const expenseIndex = clicked.closest("[data-remove-expense]")?.dataset.removeExpense;
+      const journalIndex = clicked.closest("[data-remove-journal]")?.dataset.removeJournal;
+      const memberIndex = clicked.closest("[data-remove-member]")?.dataset.removeMember;
+      const docIndex = clicked.closest("[data-remove-doc]")?.dataset.removeDoc;
+
+      if (selectDay !== undefined) {
+        setSelectedDay(selectDay);
+        const activePanel = $(".panel.active");
+        if (activePanel) activePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      if (hotelDate) {
+        if (!requireEditor()) return;
+        openHotelDialog(hotelDate);
+      }
+
+      if (placeQuery) {
+        const query = decodeURIComponent(placeQuery);
+        const name = decodeURIComponent(placeTarget.dataset.placeName || placeQuery);
+        const references = placeReferences[query] || [];
+        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(`${name} ${query} 部落格 遊記`)}`;
+        $("#placeTitle").textContent = name;
+        $("#placeIntro").textContent = placeDetails[query] || "這個地點目前還沒有詳細介紹，先用地圖確認位置與營業資訊。";
+        $("#placeLinks").innerHTML = references
+          .concat([["搜尋更多部落格遊記", searchUrl]])
+          .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noreferrer">${label}</a></li>`)
+          .join("");
+        $("#placeMap").href = mapUrl(query);
+        $("#placeDialog").showModal();
+      }
+
+      if (expenseIndex !== undefined) {
+        if (!requireEditor()) return;
+        const [removed] = state.expenses.splice(Number(expenseIndex), 1);
+        deleteCloudRecord("expenses", removed?.id);
+        saveLocal();
+        renderExpenses();
+        updateEditLock();
+      }
+
+      if (journalIndex !== undefined) {
+        if (!requireEditor()) return;
+        const [removed] = state.journals.splice(Number(journalIndex), 1);
+        deleteCloudRecord("journals", removed?.id);
+        saveLocal();
+        renderJournals();
+        updateEditLock();
+      }
+
+      if (memberIndex !== undefined) {
+        if (!requireEditor()) return;
+        const [removedEmail] = state.members.splice(Number(memberIndex), 1);
+        syncMembersToCloud.removedEmail = removedEmail;
+        saveLocal();
+        renderMembers();
+        syncMembersToCloud();
+        updateEditLock();
+      }
+
+      if (docIndex !== undefined) {
+        if (!requireEditor()) return;
+        const [removed] = state.docs.splice(Number(docIndex), 1);
+        deleteCloudRecord("docs", removed?.id);
+        saveLocal();
+        renderDocs();
+        updateEditLock();
+      }
+    });
+
+    document.addEventListener("change", (event) => {
+      const offlineQuery = event.target.dataset.offlineMap;
+      if (!offlineQuery) return;
+      if (!requireEditor()) {
+        event.target.checked = !event.target.checked;
+        return;
+      }
+      const query = decodeURIComponent(offlineQuery);
+      state.offline[query] = event.target.checked;
+      saveLocal();
+      renderOfflineList();
+    });
+
+    $("#closePlaceDialog").addEventListener("click", () => $("#placeDialog").close());
+    $("#closeHotelDialog").addEventListener("click", () => $("#hotelDialog").close());
+    $("#settingsBtn").addEventListener("click", () => $("#settingsDialog").showModal());
+    $("#closeSettingsDialog").addEventListener("click", () => $("#settingsDialog").close());
+
+    $("#hotelForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!requireEditor()) return;
+      const title = $("#hotelName").value.trim();
+      if (!title) return;
+      const applied = applyHotelFromDoc(title, $("#hotelStart").value, $("#hotelEnd").value);
+      if (!applied) {
+        alert("請選擇住宿開始與結束日期。");
+        return;
+      }
+      saveLocal();
+      renderItinerary();
+      renderOfflineList();
+      updateEditLock();
+      $("#hotelDialog").close();
+    });
+
+    $("#expenseForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!requireEditor()) return;
+      const form = event.currentTarget;
+      const scope = $("#expenseScope").value;
+      const item = {
+        scope,
+        date: scope === "trip" ? "" : $("#expenseDate").value,
+        currency: $("#expenseCurrency").value,
+        title: $("#expenseTitle").value.trim(),
+        amount: Number($("#expenseAmount").value),
+        category: $("#expenseCategory").value,
+        note: $("#expenseReceiptText").value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      item.id = await saveCloudRecord("expenses", item);
+      state.expenses.unshift(item);
+      form.reset();
+      $("#expenseScope").value = "day";
+      $("#expenseDate").value = selectedDateValue();
+      syncExpenseScope();
+      saveLocal();
+      renderExpenses();
+      renderDayHub();
+      updateEditLock();
+    });
+
+    $("#expenseScope").addEventListener("change", syncExpenseScope);
+
+    $("#detectExpenseBtn").addEventListener("click", () => {
+      const fileName = $("#expenseReceipt").files?.[0]?.name || "";
+      const text = `${$("#expenseTitle").value} ${$("#expenseReceiptText").value} ${fileName}`;
+      const detected = detectExpenseFromText(text);
+      if (!detected) {
+        alert("目前沒有偵測到金額。可在備註輸入像 USD 25、VND 1200000、NTD 800 這類文字。");
+        return;
+      }
+      $("#expenseAmount").value = detected.amount;
+      $("#expenseCurrency").value = detected.currency;
+      $("#expenseCategory").value = detected.category;
+      if (!$("#expenseTitle").value.trim()) $("#expenseTitle").value = guessCategory(text, "收據花費");
+    });
+
+    $("#memberForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!requireEditor()) return;
+      const email = $("#memberEmail").value.trim().toLowerCase();
+      if (!email) return;
+      if (!state.members.includes(email) && email !== currentUser?.email) {
+        state.members.push(email);
+      }
+      $("#memberEmail").value = "";
+      saveLocal();
+      renderMembers();
+      await syncMembersToCloud();
+      updateEditLock();
+    });
+
+    $("#docForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!requireEditor()) return;
+      const form = event.currentTarget;
+      $("#docStatus").textContent = "正在加入文件...";
+      const file = $("#docFile").files?.[0];
+      if (!file) {
+        $("#docStatus").textContent = "請先選擇 PDF 或圖片。";
+        return;
+      }
+      let driveFile = await uploadCloudDoc(file);
+      if (!driveFile?.url) {
+        const localUrl = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+        driveFile = { url: localUrl, provider: "local" };
+      }
+      const item = {
+        title: $("#docTitle").value.trim(),
+        category: $("#docCategory").value,
+        stayStart: $("#docStayStart").value,
+        stayEnd: $("#docStayEnd").value,
+        expenseAmount: Number($("#docExpenseAmount").value || 0),
+        expenseCurrency: $("#docExpenseCurrency").value,
+        expenseCategory: $("#docExpenseCategory").value,
+        fileName: file.name,
+        type: file.type,
+        url: driveFile.url,
+        webViewLink: driveFile.webViewLink || driveFile.url,
+        thumbnailLink: driveFile.thumbnailLink || "",
+        driveFileId: driveFile.driveFileId || "",
+        provider: driveFile.provider || "local",
+        createdAt: new Date().toISOString()
+      };
+      item.id = await saveCloudRecord("docs", item);
+      state.docs.unshift(item);
+      if ($("#docApplyHotel").checked && item.category === "住宿") {
+        applyHotelFromDoc(item.title, item.stayStart, item.stayEnd);
+        renderItinerary();
+        renderOfflineList();
+      }
+      const detected = detectExpenseFromText(`${item.title} ${item.fileName}`);
+      const expenseAmount = item.expenseAmount || detected?.amount || 0;
+      const expenseCurrency = item.expenseAmount ? item.expenseCurrency : (detected?.currency || item.expenseCurrency);
+      const expenseCategory = item.expenseAmount ? item.expenseCategory : guessCategory(`${item.title} ${item.fileName}`, item.expenseCategory);
+      if ($("#docCreateExpense").checked && expenseAmount) {
+        await createExpenseFromDetected({
+          title: `${item.title}（${item.category}文件）`,
+          amount: expenseAmount,
+          currency: expenseCurrency,
+          category: expenseCategory,
+          note: `由文件票券自動建立：${item.fileName}`,
+          scope: "trip"
+        });
+      }
+      form.reset();
+      saveLocal();
+      renderDocs();
+      updateEditLock();
+      $("#docStatus").textContent = "文件已加入。";
+    });
+
+    $("#journalForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!requireEditor()) return;
+      const form = event.currentTarget;
+      const photoUrls = await uploadCloudPhotos();
+      const item = {
+        date: $("#journalDate").value,
+        place: $("#journalPlace").value.trim(),
+        text: $("#journalText").value.trim(),
+        photos: photoUrls,
+        createdAt: new Date().toISOString()
+      };
+      item.id = await saveCloudRecord("journals", item);
+      state.journals.unshift(item);
+      state.photos = [];
+      state.photoFiles = [];
+      form.reset();
+      $("#journalDate").value = selectedDateValue();
+      saveLocal();
+      renderPhotoPreview();
+      renderJournals();
+      renderDayHub();
+      updateEditLock();
+    });
+
+    $("#photoInput").addEventListener("change", async (event) => {
+      if (!requireEditor()) {
+        event.target.value = "";
+        return;
+      }
+      const files = Array.from(event.target.files || []).slice(0, 6);
+      state.photoFiles = files;
+      state.photos = await Promise.all(files.map((file) => new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      })));
+      renderPhotoPreview();
+    });
+
+    $("#voiceBtn").addEventListener("click", () => {
+      if (!requireEditor()) return;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        $("#voiceStatus").textContent = "這個瀏覽器沒有開放網頁語音辨識，請改用手機鍵盤上的麥克風輸入。";
+        $("#journalText").focus();
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = "zh-TW";
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      recognition.onstart = () => { $("#voiceStatus").textContent = "正在聽你說話..."; };
+      recognition.onresult = (event) => {
+        const text = Array.from(event.results).map((result) => result[0].transcript).join("");
+        $("#journalText").value = `${$("#journalText").value}${text}`;
+      };
+      recognition.onend = () => { $("#voiceStatus").textContent = "語音輸入已結束，可以繼續補字或儲存。"; };
+      recognition.start();
+    });
+
+    $("#clearLocalBtn").addEventListener("click", () => {
+      if (!requireEditor()) return;
+      if (!confirm("確定要清除這支手機上的花費、心得、住宿修改與暫存檔案？雲端資料不會一起刪除。")) return;
+      state.expenses = [];
+      state.journals = [];
+      state.hotels = {};
+      state.offline = {};
+      state.members = [];
+      state.docs = [];
+      state.photos = [];
+      state.photoFiles = [];
+      saveLocal();
+      renderItinerary();
+      renderExpenses();
+      renderJournals();
+      renderPhotoPreview();
+      renderOfflineList();
+      renderMembers();
+      renderDocs();
+      updateEditLock();
+    });
+
+    async function setupAuth() {
+      $("#dataMode").textContent = hasFirebaseConfig
+        ? "已連上雲端：文字資料會同步，照片與票券會存到 Google Drive。"
+        : "離線模式：資料只存在這支手機的瀏覽器。";
+
+      if (!hasFirebaseConfig) {
+        $("#loginBtn").addEventListener("click", () => {
+          alert("雲端同步尚未設定完成，目前只能瀏覽行程。");
+        });
+        return;
+      }
+
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+      const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged, getRedirectResult, setPersistence, browserLocalPersistence } = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");
+      const firestore = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
+      const storageApi = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js");
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      cloud = {
+        db: firestore.getFirestore(app),
+        storage: storageApi.getStorage(app),
+        firestore,
+        storageApi
+      };
+      const provider = new GoogleAuthProvider();
+      provider.addScope("https://www.googleapis.com/auth/drive.file");
+      provider.setCustomParameters({ include_granted_scopes: "true" });
+      googleAuth = auth;
+      googleProvider = provider;
+      googleAuthProviderApi = GoogleAuthProvider;
+      googleSignInWithPopup = signInWithPopup;
+      await setPersistence(auth, browserLocalPersistence);
+      try {
+        const redirectResult = await getRedirectResult(auth);
+        captureDriveToken(redirectResult);
+        if (redirectResult?.user) {
+          $("#dataMode").textContent = `Google 登入完成：${redirectResult.user.email || redirectResult.user.displayName || "已登入"}。正在同步資料...`;
+        }
+      } catch (error) {
+        console.error("Google redirect sign-in failed", error);
+        authReady = true;
+        const code = error?.code || "";
+        const message = code === "auth/unauthorized-domain"
+          ? "這個網址還沒有被允許使用 Google 登入，請檢查登入網域設定。"
+          : `Google 登入轉跳失敗：${code || error?.message || "請稍後再試"}`;
+        $("#dataMode").textContent = message;
+        alert(message);
+      }
+
+      $("#loginBtn").addEventListener("click", async () => {
+        try {
+          if (auth.currentUser) {
+            await signOut(auth);
+          } else {
+            $("#dataMode").textContent = "正在開啟 Google 登入視窗...";
+            try {
+              const result = await signInWithPopup(auth, provider);
+              captureDriveToken(result);
+              if (result?.user) {
+                $("#dataMode").textContent = `Google 登入完成：${result.user.email || result.user.displayName || "已登入"}。正在同步資料...`;
+              }
+            } catch (popupError) {
+              const popupCode = popupError?.code || "";
+              if (popupCode === "auth/popup-closed-by-user") {
+                $("#dataMode").textContent = "Google 登入視窗已關閉，尚未完成登入。";
+                return;
+              }
+              console.warn("Google popup sign-in failed; falling back to redirect.", popupError);
+              $("#dataMode").textContent = "登入視窗無法完成，改用 Google 轉跳登入...";
+              await signInWithRedirect(auth, provider);
+            }
+          }
+        } catch (error) {
+          console.error("Google sign-in failed", error);
+          const code = error?.code || "";
+          const message = code === "auth/unauthorized-domain"
+            ? "這個網址還沒有被允許使用 Google 登入，請檢查登入網域設定。"
+            : `Google 登入失敗：${code || error?.message || "請稍後再試"}`;
+          $("#dataMode").textContent = message;
+          alert(message);
+        }
+      });
+
+      onAuthStateChanged(auth, (user) => {
+        authReady = true;
+        currentUser = user;
+        $("#loginBtn").innerHTML = user
+          ? `<img src="${user.photoURL}" alt="" />${user.displayName || "已登入"}`
+          : "使用 Google 登入";
+        $("#dataMode").textContent = user
+          ? `已登入 ${user.email || user.displayName || "Google 帳號"}。花費、心得與住宿會同步；上傳照片或票券時會存到 Google Drive。`
+          : "尚未登入。登入後可以同步花費、心得、住宿與旅伴清單，並上傳照片和票券。";
+        if (user) loadCloudData();
+        updateEditLock();
+      });
+    }
+
+    applyTripConfig();
+    setSelectedDay(selectedDayIndex);
+    syncExpenseScope();
+    renderStayDateOptions();
+    renderPhotoPreview();
+    renderOfflineList();
+    renderMembers();
+    renderDocs();
+    updateEditLock();
+    setupAuth();
+  </script>
+</body>
+</html>
