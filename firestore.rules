@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAllowedTrip(tripId) {
+      return tripId == "thailand-chiangmai-2027";
+    }
+
+    function signedIn() {
+      return request.auth != null && request.auth.token.email != null;
+    }
+
+    function isTripMember(tripId) {
+      return isAllowedTrip(tripId)
+        && signedIn()
+        && exists(/databases/$(database)/documents/trips/$(tripId)/members/$(request.auth.token.email));
+    }
+
+    match /trips/{tripId} {
+      allow read, update: if isTripMember(tripId);
+      allow create: if isAllowedTrip(tripId) && signedIn();
+
+      match /members/{email} {
+        allow read: if isTripMember(tripId);
+        allow create: if isTripMember(tripId)
+          || (
+            isAllowedTrip(tripId)
+            &&
+            signedIn()
+            && email == request.auth.token.email
+            && !exists(/databases/$(database)/documents/trips/$(tripId))
+          );
+        allow update, delete: if isTripMember(tripId);
+      }
+
+      match /{collectionName}/{docId} {
+        allow read, create, update, delete: if isTripMember(tripId);
+      }
+    }
+  }
+}

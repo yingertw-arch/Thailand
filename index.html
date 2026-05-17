@@ -873,7 +873,7 @@
       </form>
       <div class="list" id="memberList"></div>
       <h3>檔案分享提醒</h3>
-      <p class="status">建議先加入旅伴再上傳照片或票券。先前已上傳的檔案若要補分享，請到 Google Drive 的 Vietnam Travel Handbook 資料夾手動調整權限。</p>
+      <p class="status">建議先加入旅伴再上傳照片或票券。先前已上傳的檔案若要補分享，請到 Google Drive 的 Thailand Travel Handbook 資料夾手動調整權限。</p>
       <div class="actions">
         <button class="btn warn" type="button" id="clearLocalBtn">清除這台手機資料</button>
         <a class="map-link" href="https://drive.google.com/" target="_blank" rel="noreferrer">開啟 Google Drive</a>
@@ -1101,7 +1101,7 @@ window.TRIP_CONFIG = {
     const mapUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
     const tripConfig = window.TRIP_CONFIG || {};
     const today = tripConfig.today || "2026-07-18";
-    const tripId = tripConfig.tripId || "vietnam-2026-da-nang";
+    const tripId = tripConfig.tripId || "thailand-chiangmai-2027";
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
@@ -1841,7 +1841,7 @@ window.TRIP_CONFIG = {
 
     async function ensureDriveFolder() {
       if (driveFolderId) return driveFolderId;
-      const folderName = "Vietnam Travel Handbook";
+      const folderName = "Thailand Travel Handbook";
       const q = encodeURIComponent(`mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`);
       const search = await driveFetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name)&pageSize=1`);
       const result = await search.json();
