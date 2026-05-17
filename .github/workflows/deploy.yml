@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: ["master"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -20,11 +21,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Inject Firebase config
+      - name: Configure Firebase web app
+        shell: bash
         run: |
-          cat > firebase-config.js << 'JSEOF'
+          cat > firebase-config.js <<'EOF'
           window.FIREBASE_CONFIG = {
             apiKey: "${{ secrets.FIREBASE_API_KEY }}",
             authDomain: "${{ secrets.FIREBASE_AUTH_DOMAIN }}",
@@ -34,13 +37,16 @@ jobs:
             appId: "${{ secrets.FIREBASE_APP_ID }}",
             measurementId: "${{ secrets.FIREBASE_MEASUREMENT_ID }}"
           };
-          JSEOF
+          EOF
 
-      - uses: actions/configure-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
